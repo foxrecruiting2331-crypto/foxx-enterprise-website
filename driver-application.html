@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Driver Application | Foxx Enterprise</title>
+<style>
+:root{--orange:#ff7a00;--bg:#0b0b0b;--card:#171717;--line:#333;--text:#f5f5f5;--muted:#bdbdbd}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+.wrap{max-width:1000px;margin:auto;padding:28px 20px 60px}
+header{padding:20px 0 30px;border-bottom:1px solid #292929;margin-bottom:28px}
+.logo{font-size:30px;font-weight:800}.logo span{color:var(--orange)}
+h1{font-size:34px;margin:10px 0}.intro{color:var(--muted);font-size:17px;line-height:1.6}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:20px}
+h2{margin-top:0;font-size:22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-weight:700;margin-bottom:7px}
+input,select,textarea{width:100%;background:#0e0e0e;color:#fff;border:1px solid #444;border-radius:9px;padding:13px;font-size:15px}
+textarea{min-height:130px;resize:vertical}
+.full{grid-column:1/-1}
+.note{font-size:13px;color:var(--muted);line-height:1.5}
+.check{display:flex;gap:10px;align-items:flex-start;margin:12px 0;color:#ddd}
+.check input{width:auto;margin-top:4px}
+button{background:var(--orange);color:#111;border:0;border-radius:9px;padding:14px 22px;font-weight:800;font-size:16px;cursor:pointer}
+button:hover{filter:brightness(1.08)}
+.back{color:#fff;text-decoration:none}.back:hover{color:var(--orange)}
+footer{color:#999;border-top:1px solid #292929;padding-top:20px;margin-top:30px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="back" href="index.html">← Back to jobs</a>
+  <div class="logo">FOXX <span>ENTERPRISE</span></div>
+  <h1>Truck Driver Application</h1>
+  <p class="intro">Tell us a little about yourself and the type of driving opportunity you're looking for. A recruiter will follow up with you.</p>
+</header>
+
+<form action="https://formsubmit.co/Allison.Fox@foxxenterprisellc.com" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="_subject" value="New Foxx Enterprise Driver Application">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_next" value="https://www.foxxenterprisellc.com/driver-application.html?submitted=1">
+
+  <div class="card">
+    <h2>👤 Contact Information</h2>
+    <div class="grid">
+      <div><label>First Name *</label><input name="First Name" required></div>
+      <div><label>Last Name *</label><input name="Last Name" required></div>
+      <div><label>Phone *</label><input type="tel" name="Phone" required></div>
+      <div><label>Email *</label><input type="email" name="Email" required></div>
+      <div><label>City *</label><input name="City" required></div>
+      <div><label>State *</label><input name="State" required></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🚛 CDL & Experience</h2>
+    <div class="grid">
+      <div><label>CDL Class</label><select name="CDL Class"><option value="">Select</option><option>Class A</option><option>Class B</option><option>Other</option></select></div>
+      <div><label>Years of CDL Experience</label><select name="CDL Experience"><option value="">Select</option><option>Less than 6 months</option><option>6–11 months</option><option>1–2 years</option><option>3–5 years</option><option>5+ years</option></select></div>
+      <div><label>Preferred Home Time</label><select name="Preferred Home Time"><option value="">Select</option><option>Home Daily</option><option>Home Weekly</option><option>Regional</option><option>OTR</option><option>Flexible</option></select></div>
+      <div><label>Freight Preference</label><select name="Freight Preference"><option value="">Select</option><option>No Touch</option><option>Touch Freight</option><option>Either</option></select></div>
+      <div><label>Hazmat Endorsement</label><select name="Hazmat"><option>No</option><option>Yes</option></select></div>
+      <div><label>Tanker Endorsement</label><select name="Tanker"><option>No</option><option>Yes</option></select></div>
+      <div class="full"><label>What type of job are you looking for?</label><textarea name="Job Preferences" placeholder="Example: Home daily, no touch, within 50 miles of my home, $1,500+ weekly."></textarea></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📄 Resume & Additional Information</h2>
+    <div class="grid">
+      <div class="full"><label>Resume (optional)</label><input type="file" name="attachment" accept=".pdf,.doc,.docx,.txt"></div>
+      <div class="full"><label>Anything else we should know?</label><textarea name="Additional Information"></textarea></div>
+    </div>
+    <p class="note">Please do not submit Social Security numbers, bank information, medical records, passwords, or other sensitive information through this form.</p>
+  </div>
+
+  <div class="card">
+    <label class="check"><input type="checkbox" required> <span>I confirm that the information I provided is accurate and I agree to be contacted by Foxx Enterprise about trucking opportunities.</span></label>
+    <button type="submit">Submit Driver Application</button>
+    <p class="note">After you submit, you may see a brief confirmation page while your application is sent to Foxx Enterprise.</p>
+  </div>
+</form>
+
+<footer>
+  <strong>FOXX ENTERPRISE</strong><br>
+  Call/Text: 640-248-1027 · Allison.Fox@foxxenterprisellc.com
+</footer>
+</div>
+</body>
+</html>
