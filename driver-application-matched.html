@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Matched With a Trucking Recruiter | Foxx Enterprise</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f5f5;color:#222}
+  .top{background:#111;color:#fff;padding:18px 20px;text-align:center;border-bottom:5px solid #f47b20}
+  .logo{font-size:30px;font-weight:900;letter-spacing:1px}
+  .logo span{color:#f47b20}
+  .wrap{max-width:850px;margin:30px auto;padding:0 16px}
+  .card{background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.1);overflow:hidden}
+  .hero{background:#111;color:#fff;padding:30px 28px}
+  .hero h1{margin:0 0 10px;font-size:32px}
+  .hero p{margin:0;line-height:1.6;color:#eee}
+  .orange{color:#f47b20}
+  form{padding:28px}
+  h2{font-size:20px;margin:25px 0 14px;border-left:5px solid #f47b20;padding-left:10px}
+  h2:first-child{margin-top:0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  label{font-weight:700;font-size:14px;display:block;margin-bottom:6px}
+  input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:15px}
+  textarea{min-height:110px;resize:vertical}
+  .full{grid-column:1/-1}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.4;margin-top:20px}
+  .check input{width:auto;margin-top:3px}
+  button{width:100%;border:0;border-radius:9px;background:#f47b20;color:#fff;font-size:18px;font-weight:800;padding:15px;margin-top:22px;cursor:pointer}
+  button:hover{background:#d96612}
+  .note{background:#fff5ec;border:1px solid #ffd2b0;padding:14px;border-radius:9px;margin-top:18px;font-size:14px;line-height:1.5}
+  .back{text-align:center;margin:18px 0}
+  .back a{color:#111;font-weight:700;text-decoration:none}
+  .success{display:none;margin:20px 28px;background:#eaf8ed;border:1px solid #a8d8b1;padding:18px;border-radius:10px;font-weight:700}
+  @media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.hero h1{font-size:26px}form{padding:20px}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="logo">FOXX <span>ENTERPRISE</span></div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <div class="hero">
+      <h1>Get Matched With a Trucking Recruiter</h1>
+      <p>Tell us a little about yourself and what you're looking for. <span class="orange">We'll help you find a seat that fits you best.</span></p>
+    </div>
+
+    <div id="success" class="success">
+      Thank you! Your information has been sent to Foxx Enterprise. A recruiter can review your information and follow up with you.
+    </div>
+
+    <form action="https://formsubmit.co/Allison.Fox@foxxenterprisellc.com" method="POST">
+      <input type="hidden" name="_subject" value="New Driver Lead - Foxx Enterprise Website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://www.foxxenterprisellc.com/driver-application.html?submitted=1">
+
+      <h2>Contact Information</h2>
+      <div class="grid">
+        <div>
+          <label>First Name *</label>
+          <input type="text" name="First Name" required>
+        </div>
+        <div>
+          <label>Last Name *</label>
+          <input type="text" name="Last Name" required>
+        </div>
+        <div>
+          <label>Phone *</label>
+          <input type="tel" name="Phone" required>
+        </div>
+        <div>
+          <label>Email *</label>
+          <input type="email" name="Email" required>
+        </div>
+        <div>
+          <label>City *</label>
+          <input type="text" name="City" required>
+        </div>
+        <div>
+          <label>State *</label>
+          <input type="text" name="State" required>
+        </div>
+      </div>
+
+      <h2>Driver Information</h2>
+      <div class="grid">
+        <div>
+          <label>CDL Class</label>
+          <select name="CDL Class">
+            <option value="">Select</option>
+            <option>Class A</option>
+            <option>Class B</option>
+            <option>Other</option>
+            <option>Currently obtaining CDL</option>
+          </select>
+        </div>
+        <div>
+          <label>Years of CDL Experience</label>
+          <select name="CDL Experience">
+            <option value="">Select</option>
+            <option>Less than 3 months</option>
+            <option>3–6 months</option>
+            <option>6–12 months</option>
+            <option>1–2 years</option>
+            <option>2–5 years</option>
+            <option>5+ years</option>
+          </select>
+        </div>
+        <div>
+          <label>Preferred Home Time</label>
+          <select name="Preferred Home Time">
+            <option value="">Select</option>
+            <option>Home Daily</option>
+            <option>Home Every Other Day</option>
+            <option>Home Weekly</option>
+            <option>Home Weekends</option>
+            <option>Out 2–3 Weeks</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+        <div>
+          <label>Freight Preference</label>
+          <select name="Freight Preference">
+            <option value="">Select</option>
+            <option>No Touch</option>
+            <option>Touch Freight</option>
+            <option>Either</option>
+            <option>Not Sure</option>
+          </select>
+        </div>
+        <div class="full">
+          <label>What are you looking for in your next driving job?</label>
+          <textarea name="What Driver Wants" placeholder="Pay, home time, area, type of freight, schedule, etc."></textarea>
+        </div>
+        <div class="full">
+          <label>Anything else you want us to know?</label>
+          <textarea name="Additional Information" placeholder="Optional"></textarea>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>What happens next?</strong><br>
+        A Foxx Enterprise recruiter will review your information and help match you with available trucking opportunities. You are not required to complete a carrier application on this page.
+      </div>
+
+      <label class="check">
+        <input type="checkbox" required>
+        <span>I agree to be contacted by Foxx Enterprise regarding trucking job opportunities and understand that submitting this form does not guarantee employment.</span>
+      </label>
+
+      <button type="submit">Get Matched With a Recruiter</button>
+    </form>
+  </div>
+
+  <div class="back">
+    <a href="index.html">← Back to Trucking Jobs</a>
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("submitted") === "1") {
+    document.getElementById("success").style.display = "block";
+  }
+</script>
+</body>
+</html>
