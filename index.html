@@ -6,11 +6,32 @@
 .modal-box{width:min(760px,100%);background:#171717;border:1px solid #444;border-radius:16px;padding:26px;position:relative;box-shadow:0 20px 70px rgba(0,0,0,.6)}
 .modal-close{position:absolute;right:15px;top:10px;background:#292929;color:#fff;border:0;border-radius:50%;width:38px;height:38px;font-size:24px;cursor:pointer}
 .modal-box h2{margin:0 45px 8px 0;font-size:30px}.modal-pay{color:#ff9b45;font-weight:900;font-size:18px;margin:8px 0 16px}.modal-box h4{margin-bottom:6px}.modal-box ul{color:#ccc;line-height:1.6}.modal-meta{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.modal-meta span{background:#292929;padding:7px 10px;border-radius:20px;font-size:13px}
-@media(max-width:800px){nav{display:none}.filters,.jobs,.two{grid-template-columns:1fr}}
+@media(max-width:800px){nav{display:none}.filters,.jobs,.two,#driverForm{grid-template-columns:1fr!important}}
 </style></head><body>
 <div class="top">🚛 Helping Truck Drivers Find a Seat That Fits Them Best</div><header><div class="nav"><div class="logo">FOXX <span>ENTERPRISE</span></div><nav><a href="#jobs">Find Jobs</a><a href="#recruiters">Recruiters</a><a href="#about">About</a><a href="mailto:Allison.Fox@foxxenterprisellc.com">Contact</a></nav></div></header>
 <section class="hero"><div class="wrap"><div class="eyebrow">Truck Driver Recruiting & Job Matching</div><h1>Find a trucking job that fits your life.</h1><p>Search opportunities by location, home time, freight and pay. We work with carriers to help drivers find a seat that fits them best.</p><a class="btn primary" href="#jobs">🔎 Search Driver Jobs</a><a class="btn secondary" href="#recruiters">Become a Recruiter</a></div></section>
 <main class="wrap" id="jobs"><h2>Find Your Next Seat</h2><div class="search"><div class="filters"><input id="q" placeholder="City, state or keyword"><select id="state"><option value="">All states</option><option>California</option><option>Florida</option><option>New Jersey</option><option>Multiple</option></select><select id="home"><option value="">Any home time</option><option>Home Daily</option><option>Home Weekly</option><option>Home Weekends</option></select><select id="freight"><option value="">Any freight</option><option>No Touch</option><option>Touch Freight</option></select></div></div><div id="jobsList" class="jobs"></div>
+
+<section class="wrap" id="driver-application" style="padding-top:10px">
+<div class="panel">
+<h2>🚛 Let Foxx Enterprise Find Your Next Seat</h2>
+<p>Can't find the right job? Tell us what you're looking for and we'll help match you with an opportunity.</p>
+<form id="driverForm" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<input required name="name" placeholder="Full Name">
+<input required name="phone" placeholder="Phone Number">
+<input required type="email" name="email" placeholder="Email Address">
+<input name="zip" placeholder="ZIP Code">
+<select required name="experience"><option value="">CDL Experience</option><option>Less than 3 months</option><option>3–6 months</option><option>6–12 months</option><option>1–2 years</option><option>2+ years</option></select>
+<select name="home"><option value="">Preferred Home Time</option><option>Home Daily</option><option>Home Weekly</option><option>Home Weekends</option><option>Regional</option><option>OTR</option></select>
+<select name="freight"><option value="">Preferred Freight</option><option>No Touch</option><option>Touch Freight</option><option>Either</option></select>
+<input name="pay" placeholder="Desired Pay (optional)">
+<textarea name="notes" placeholder="Tell us anything else about the job you want..." style="grid-column:1/-1;min-height:100px;padding:13px;background:#0d0d0d;border:1px solid #444;color:white;border-radius:8px"></textarea>
+<button class="btn primary" type="submit" style="grid-column:1/-1;cursor:pointer">Send My Job Match Request</button>
+</form>
+<p class="small" id="formMessage"></p>
+</div>
+</section>
+
 <div class="two" id="recruiters"><div class="panel"><h3>🚛 For Truck Drivers</h3><p>We care about matching drivers with the right opportunity—not treating you like a number.</p><ul><li>Home daily, weekly, regional and OTR options</li><li>Different pay and freight types</li><li>Application and orientation support</li></ul><a class="btn primary" href="mailto:Allison.Fox@foxxenterprisellc.com?subject=Driver Job Help">Talk With a Recruiter</a></div>
 <div class="panel"><h3>👩‍💼 Become a Driver Recruiter</h3><p>1099 commission-based recruiting. Work from anywhere and help drivers find their next seat.</p><ul><li>Inbound leads</li><li>No cold calling</li><li>Phone and computer needed</li><li>$300–$2,500 per hired driver</li><li>Training and support</li></ul><a class="btn primary" href="mailto:foxrecruiting2331@gmail.com?subject=Recruiter Application">Apply to Recruit</a></div></div>
 <div class="panel" id="about" style="margin-top:15px"><h3>About Foxx Enterprise</h3><p>Foxx Enterprise helps truck drivers find trucking opportunities based on experience, location and lifestyle.</p><p class="small">Job information should be verified with a recruiter before applying. Pay, routes, qualifications and availability can change.</p></div></main>
@@ -46,4 +67,23 @@ document.getElementById("jobModal").addEventListener("click",e=>{if(e.target.id=
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeJob()});
 
 function filter(){let q=document.querySelector("#q").value.toLowerCase(),s=document.querySelector("#state").value,h=document.querySelector("#home").value,f=document.querySelector("#freight").value;let a=jobs.filter(j=>(!q||JSON.stringify(j).toLowerCase().includes(q))&&(!s||j.state===s)&&(!h||j.home===h)&&(!f||j.freight===f));document.querySelector("#jobsList").innerHTML=a.map(j=>`<article class="card"><h3>${j.title}</h3><div class="pay">${j.pay}</div><div class="badges"><span class="badge o">${j.home}</span><span class="badge">${j.freight}</span><span class="badge">${j.location}</span></div><p><b>Experience:</b> ${j.experience}</p><ul>${j.details.slice(0,3).map(x=>`<li>${x}</li>`).join("")}</ul><button class="btn secondary" onclick="viewJob('${j.id}')">View Job Details</button><a class="btn primary" href="${apply}" target="_blank" rel="noopener">Apply Now</a><a class="btn secondary" href="mailto:Allison.Fox@foxxenterprisellc.com?subject=Question about ${encodeURIComponent(j.title)}">Ask a Question</a></article>`).join("")||'<div class="panel">No jobs match those filters. Contact us and we will help find a match.</div>'}["q","state","home","freight"].forEach(id=>document.querySelector("#"+id).addEventListener("input",filter));load();
+
+document.getElementById("driverForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ const d=new FormData(this);
+ const subject=encodeURIComponent("New Driver Job Match Request - "+d.get("name"));
+ const body=encodeURIComponent(
+ "Name: "+d.get("name")+"\n"+
+ "Phone: "+d.get("phone")+"\n"+
+ "Email: "+d.get("email")+"\n"+
+ "ZIP: "+d.get("zip")+"\n"+
+ "CDL Experience: "+d.get("experience")+"\n"+
+ "Preferred Home Time: "+d.get("home")+"\n"+
+ "Preferred Freight: "+d.get("freight")+"\n"+
+ "Desired Pay: "+d.get("pay")+"\n"+
+ "Notes: "+d.get("notes")
+ );
+ window.location.href="mailto:Allison.Fox@foxxenterprisellc.com?subject="+subject+"&body="+body;
+ document.getElementById("formMessage").textContent="Your email app should open with your job-match request ready to send.";
+});
 </script></body></html>
