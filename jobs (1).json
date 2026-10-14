@@ -1,0 +1,108 @@
+[
+  {
+    "id": "target-home-daily",
+    "title": "Home Daily • Final Mile Delivery",
+    "location": "Multiple Locations",
+    "state": "Pennsylvania",
+    "pay": "$24–$27.50/hr • Avg. $1,500/week",
+    "home": "Home Daily",
+    "freight": "No Touch",
+    "experience": "6 months CDL",
+    "details": [
+      "Final-mile delivery to Target grocery stores.",
+      "Approximately 1,700 miles per week.",
+      "Pick up a trailer from another driver and complete the assigned delivery.",
+      "**Qualifications:**",
+      "- Must be at least 21 years old.",
+      "- Valid CDL required.",
+      "- Minimum 6 months of CDL experience.",
+      "- Must pass hair and urine drug testing.",
+      "- No SAP.",
+      "**Home Time:** Home daily",
+      "**Freight:** No touch freight",
+      "**Pay:** $24–$27.50 per hour; advertised average of $1,500 per week."
+    ],
+    "apply": ""
+  },
+  {
+    "id": "touch-freight",
+    "title": "Touch Freight • Pallet Jack/Liftgate",
+    "location": "Multiple Locations",
+    "state": "Multiple",
+    "pay": "$0.70 CPM • Avg. $1,700–$2,000/week",
+    "home": "Home Weekly",
+    "freight": "Touch Freight",
+    "experience": "12 months TT",
+    "details": [
+      "Electric pallet jack and liftgate trailer",
+      "Sun–Thu or Mon–Fri",
+      "No Saturday runs",
+      "Typical starts 12 AM–3 AM",
+      "Urine test and no SAP"
+    ]
+  },
+  {
+    "id": "intermodal-ca",
+    "title": "Container Intermodal • California",
+    "location": "Fontana / Huntington Park / Stockton, CA",
+    "state": "California",
+    "pay": "Hourly + mileage + productivity • Avg. $1,679/week",
+    "home": "Home Daily",
+    "freight": "No Touch",
+    "experience": "1 year in last 3 years OR 2 years in last 5",
+    "details": [
+      "Multiple shift options",
+      "Fontana/Huntington Park and Stockton opportunities",
+      "Day, night and weekend pay differentials",
+      "Hair and urine testing"
+    ]
+  },
+  {
+    "id": "jacksonville",
+    "title": "I-95 Corridor • Home Weekly",
+    "location": "Within 50 miles of Jacksonville, FL",
+    "state": "Florida",
+    "pay": "$0.64–$0.69 CPM + $15 stop pay • Avg. $1,507–$1,683/week",
+    "home": "Home Weekly",
+    "freight": "No Touch",
+    "experience": "Valid Class A CDL",
+    "details": [
+      "Approx. 2 stops per week",
+      "Approx. 2,000 weekly miles",
+      "I-95 corridor from Southern Maine to Florida"
+    ]
+  },
+  {
+    "id": "north-regional",
+    "title": "North Regional • Home Weekends",
+    "location": "Northeast / Mid-Atlantic",
+    "state": "Multiple",
+    "pay": "$0.69–$0.73+ CPM depending on experience/Hazmat",
+    "home": "Home Weekends",
+    "freight": "No Touch",
+    "experience": "3+ months CDL",
+    "details": [
+      "No NYC or Canada",
+      "KY, WV, OH, MD, PA, NJ, NY, CT and MA",
+      "Approx. 3,000 weekly miles",
+      "2 consecutive days off weekly"
+    ]
+  },
+  {
+    "id": "burlington-nj",
+    "title": "NJ to TX • Home Weekends",
+    "location": "Within 50 miles of Burlington, NJ",
+    "state": "New Jersey",
+    "pay": "$0.70–$0.74 CPM • Avg. 3,000 miles/week",
+    "home": "Home Weekends",
+    "freight": "No Touch",
+    "experience": "3 months CDL",
+    "details": [
+      "NJ/DC area to Texas",
+      "5–6 stops per load",
+      "Approx. 2 loads per week",
+      "Drop-and-hook pay may apply",
+      "21+, valid Class A CDL, no SAP"
+    ]
+  }
+]
