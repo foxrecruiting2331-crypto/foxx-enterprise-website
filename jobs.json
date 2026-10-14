@@ -3,18 +3,26 @@
     "id": "target-home-daily",
     "title": "Home Daily • Final Mile Delivery",
     "location": "Multiple Locations",
-    "state": "Multiple",
+    "state": "Pennsylvania",
     "pay": "$24–$27.50/hr • Avg. $1,500/week",
     "home": "Home Daily",
     "freight": "No Touch",
     "experience": "6 months CDL",
     "details": [
-      "Final-mile delivery to Target grocery stores",
-      "Approx. 1,700 weekly miles",
-      "Pick up trailer from another driver and complete delivery",
-      "21+, valid CDL, hair and urine testing",
-      "No SAP"
-    ]
+      "Final-mile delivery to Target grocery stores.",
+      "Approximately 1,700 miles per week.",
+      "Pick up a trailer from another driver and complete the assigned delivery.",
+      "**Qualifications:**",
+      "- Must be at least 21 years old.",
+      "- Valid CDL required.",
+      "- Minimum 6 months of CDL experience.",
+      "- Must pass hair and urine drug testing.",
+      "- No SAP.",
+      "**Home Time:** Home daily",
+      "**Freight:** No touch freight",
+      "**Pay:** $24–$27.50 per hour; advertised average of $1,500 per week."
+    ],
+    "apply": ""
   },
   {
     "id": "touch-freight",
