@@ -72,8 +72,7 @@ function viewJob(id){
   <ul>${j.details.map(x=>`<li>${x}</li>`).join("")}</ul>
   <div style="margin-top:18px">
 <a class="btn primary" href="driver-application.html?job=${encodeURIComponent(j.title)}">Apply Now</a>   
-<a class="btn secondary" href="mailto:Allison.Fox@foxxenterprisellc.com?subject=Question%20about%20job">Ask a Question</a>
-
+<a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdHI6WBei7q7jTDMzurQz6Y12CpVMc8G_2RGE0Tal3ax5jqIQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Ask a Question</a>
   </div>`;
  const m=document.getElementById("jobModal");m.classList.add("show");m.setAttribute("aria-hidden","false");
 }
