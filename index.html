@@ -58,46 +58,133 @@
   </div>
 </div>
 
-<script>
-let jobs=[];const apply="https://intelliapp.driverapponline.com/c/foxxenterprisellc?r=Allison.Fox";
-async function load(){jobs=await fetch("jobs.json").then(r=>r.json());filter()}
-function viewJob(id){
- const j=jobs.find(x=>x.id===id); if(!j)return;
- document.getElementById("jobDetails").innerHTML=
- `<h2>${j.title}</h2>
-  <div class="modal-pay">${j.pay}</div>
-  <div class="modal-meta"><span>${j.home}</span><span>${j.freight}</span><span>${j.location}</span></div>
-  <p><b>Experience:</b> ${j.experience}</p>
-  <h4>Job Details</h4>
-  <ul>${j.details.map(x=>`<li>${x}</li>`).join("")}</ul>
-  <div style="margin-top:18px">
-<a class="btn primary" href="driver-application.html?job=${encodeURIComponent(j.title)}">Apply Now</a>   
-<a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdHI6WBei7q7jTDMzurQz6Y12CpVMc8G_2RGE0Tal3ax5jqIQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Ask a Question</a>
-  </div>`;
- const m=document.getElementById("jobModal");m.classList.add("show");m.setAttribute("aria-hidden","false");
-}
-function closeJob(){const m=document.getElementById("jobModal");m.classList.remove("show");m.setAttribute("aria-hidden","true")}
-document.getElementById("jobModal").addEventListener("click",e=>{if(e.target.id==="jobModal")closeJob()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeJob()});
 
-function filter(){let q=document.querySelector("#q").value.toLowerCase(),s=document.querySelector("#state").value,h=document.querySelector("#home").value,f=document.querySelector("#freight").value;let a=jobs.filter(j=>(!q||JSON.stringify(j).toLowerCase().includes(q))&&(!s||j.state===s)&&(!h||j.home===h)&&(!f||j.freight===f));document.querySelector("#jobsList").innerHTML=a.map(j=>`<article class="card"><h3>${j.title}</h3><div class="pay">${j.pay}</div><div class="badges"><span class="badge o">${j.home}</span><span class="badge">${j.freight}</span><span class="badge">${j.location}</span></div><p><b>Experience:</b> ${j.experience}</p><ul>${j.details.slice(0,3).map(x=>`<li>${x}</li>`).join("")}</ul><button class="btn secondary" onclick="viewJob('${j.id}')">View Job Details</button>`<a class="btn primary" href="${apply}" target="_blank" rel="noopener">Apply Now</a><a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdHI6WBei7q7jTDMzurQz6Y12CpVMc8G_2RGE0Tal3ax5jqIQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Ask a Question</a>`
-document.getElementById("driverForm").addEventListener("submit",function(e){
- e.preventDefault();
- const d=new FormData(this);
- const subject=encodeURIComponent("New Driver Job Match Request - "+d.get("name"));
- const body=encodeURIComponent(
- "Name: "+d.get("name")+"\n"+
- "Phone: "+d.get("phone")+"\n"+
- "Email: "+d.get("email")+"\n"+
- "ZIP: "+d.get("zip")+"\n"+
- "CDL Experience: "+d.get("experience")+"\n"+
- "Preferred Home Time: "+d.get("home")+"\n"+
- "Preferred Freight: "+d.get("freight")+"\n"+
- "Desired Pay: "+d.get("pay")+"\n"+
- "Notes: "+d.get("notes")
- );
- window.location.href="mailto:Allison.Fox@foxxenterprisellc.com?subject="+subject+"&body="+body;
- document.getElementById("formMessage").textContent="Your email app should open with your job-match request ready to send.";
+<script>
+const apply = "https://intelliapp.driverapponline.com/c/foxxenterprisellc?r=Allison.Fox";
+
+const questionForm = "https://docs.google.com/forms/d/e/1FAIpQLSdHI6WBei7q7jTDMzurQz6Y12CpVMc8G_2RGE0Tal3ax5jqIQ/viewform?usp=publish-editor";
+
+let jobs = [];
+
+async function load() {
+  try {
+    const response = await fetch("jobs.json");
+    if (!response.ok) throw new Error("Could not load jobs.json");
+    jobs = await response.json();
+    filter();
+  } catch (error) {
+    document.querySelector("#jobsList").innerHTML =
+      '<div class="panel">We are having trouble loading our job listings. Please refresh the page or contact Foxx Enterprise.</div>';
+    console.error(error);
+  }
+}
+
+function viewJob(id) {
+  const j = jobs.find(x => String(x.id) === String(id));
+  if (!j) return;
+
+  document.getElementById("jobDetails").innerHTML = `
+    <h2>${j.title}</h2>
+    <div class="modal-pay">${j.pay}</div>
+    <div class="modal-meta">
+      <span>${j.home}</span>
+      <span>${j.freight}</span>
+      <span>${j.location}</span>
+    </div>
+    <p><b>Experience:</b> ${j.experience}</p>
+    <h4>Job Details</h4>
+    <ul>${j.details.map(x => `<li>${x}</li>`).join("")}</ul>
+    <div style="margin-top:18px">
+      <a class="btn primary" href="${apply}" target="_blank" rel="noopener">Apply Now</a>
+      <a class="btn secondary" href="${questionForm}" target="_blank" rel="noopener">Ask a Question</a>
+    </div>
+  `;
+
+  const modal = document.getElementById("jobModal");
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeJob() {
+  const modal = document.getElementById("jobModal");
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+document.getElementById("jobModal").addEventListener("click", e => {
+  if (e.target.id === "jobModal") closeJob();
 });
-           
-load();</script></body></html>
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeJob();
+});
+
+function filter() {
+  const q = document.querySelector("#q").value.toLowerCase();
+  const s = document.querySelector("#state").value;
+  const h = document.querySelector("#home").value;
+  const f = document.querySelector("#freight").value;
+
+  const filteredJobs = jobs.filter(j =>
+    (!q || JSON.stringify(j).toLowerCase().includes(q)) &&
+    (!s || j.state === s) &&
+    (!h || j.home === h) &&
+    (!f || j.freight === f)
+  );
+
+  document.querySelector("#jobsList").innerHTML =
+    filteredJobs.map(j => `
+      <article class="card">
+        <h3>${j.title}</h3>
+        <div class="pay">${j.pay}</div>
+        <div class="badges">
+          <span class="badge o">${j.home}</span>
+          <span class="badge">${j.freight}</span>
+          <span class="badge">${j.location}</span>
+        </div>
+        <p><b>Experience:</b> ${j.experience}</p>
+        <ul>${j.details.slice(0, 3).map(x => `<li>${x}</li>`).join("")}</ul>
+        <button class="btn secondary" onclick="viewJob('${j.id}')">View Job Details</button>
+        <a class="btn primary" href="${apply}" target="_blank" rel="noopener">Apply Now</a>
+        <a class="btn secondary" href="${questionForm}" target="_blank" rel="noopener">Ask a Question</a>
+      </article>
+    `).join("") ||
+    '<div class="panel">No jobs match those filters. Contact us and we will help find a match.</div>';
+}
+
+["q", "state", "home", "freight"].forEach(id => {
+  document.querySelector("#" + id).addEventListener("input", filter);
+  document.querySelector("#" + id).addEventListener("change", filter);
+});
+
+document.getElementById("driverForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const d = new FormData(this);
+  const subject = encodeURIComponent(
+    "New Driver Job Match Request - " + d.get("name")
+  );
+
+  const body = encodeURIComponent(
+    "Name: " + d.get("name") + "\n" +
+    "Phone: " + d.get("phone") + "\n" +
+    "Email: " + d.get("email") + "\n" +
+    "ZIP: " + d.get("zip") + "\n" +
+    "CDL Experience: " + d.get("experience") + "\n" +
+    "Preferred Home Time: " + d.get("home") + "\n" +
+    "Preferred Freight: " + d.get("freight") + "\n" +
+    "Desired Pay: " + d.get("pay") + "\n" +
+    "Notes: " + d.get("notes")
+  );
+
+  window.location.href =
+    "mailto:Allison.Fox@foxxenterprisellc.com?subject=" +
+    subject + "&body=" + body;
+
+  document.getElementById("formMessage").textContent =
+    "Your email app should open with your job-match request ready to send.";
+});
+
+load();
+</script>
+</script></body></html>
