@@ -157,8 +157,8 @@ function filter() {
   document.querySelector("#" + id).addEventListener("change", filter);
 });
 
-document.getElementById("driverForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+const driverForm = document.getElementById("driverForm");
+if (driverForm) driverForm.addEventListener("submit", function(e) {  e.preventDefault();
 
   const d = new FormData(this);
   const subject = encodeURIComponent(
