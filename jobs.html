@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truck Driver Jobs | Foxx Enterprise</title>
+<style>
+:root {
+  --orange: #f58220;
+  --black: #111111;
+  --white: #ffffff;
+  --gray: #f4f4f4;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--gray);
+  color: var(--black);
+}
+header {
+  background: var(--black);
+  color: white;
+  padding: 18px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--orange);
+}
+.logo { width: 210px; max-width: 65%; height: auto; }
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 8px;
+  font-weight: bold;
+}
+nav a:hover { color: var(--orange); }
+.hero {
+  background: linear-gradient(120deg, #111, #292929);
+  color: white;
+  text-align: center;
+  padding: 55px 20px;
+}
+.hero h1 { font-size: clamp(30px, 5vw, 46px); margin: 0 0 14px; }
+.hero h1 span { color: var(--orange); }
+.hero p { font-size: 18px; line-height: 1.6; }
+.button {
+  display: inline-block;
+  background: var(--orange);
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 13px 18px;
+  border-radius: 7px;
+  border: 0;
+  cursor: pointer;
+}
+.button.dark { background: #111; color: white; }
+main { max-width: 1150px; margin: auto; padding: 30px 20px 55px; }
+.search-panel {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 3px 14px #00000012;
+  margin-top: -5px;
+}
+.search-panel h2 { margin-top: 0; }
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+input, select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 15px;
+  background: white;
+}
+.section-title { margin: 35px 0 18px; }
+#jobCount { color: #555; }
+#jobs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 20px;
+}
+.job-card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  border-top: 5px solid var(--orange);
+  box-shadow: 0 3px 14px #00000010;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.job-card h3 { margin: 0; font-size: 21px; }
+.job-card p { line-height: 1.55; margin: 0; color: #444; }
+.tag {
+  display: inline-block;
+  background: #fff0e2;
+  color: #8a3b00;
+  padding: 6px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 5px 5px 0;
+}
+.job-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 8px; }
+.job-actions .button { text-align: center; flex: 1; }
+.notice {
+  background: white;
+  padding: 22px;
+  border-radius: 10px;
+  margin-top: 28px;
+  line-height: 1.6;
+}
+footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 28px 20px;
+  border-top: 4px solid var(--orange);
+  line-height: 1.7;
+}
+footer a { color: var(--orange); }
+@media (max-width: 600px) {
+  header { justify-content: center; text-align: center; }
+  nav { width: 100%; text-align: center; }
+  .hero { padding: 40px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">
+    <img class="logo" src="foxx-enterprise-logo.png"
+      alt="Foxx Enterprise Truck Driver Recruiting">
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="jobs.html">Find Jobs</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrxEsSTvTCYugn6Xaz2lUodnY4Lu8VHOrTgKqOtbpOBXhksg/viewform?usp=dialo">Get Matched</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Find Your <span>Next Seat</span></h1>
+  <p>Explore trucking opportunities that fit your experience, pay goals, and home-time needs.</p>
+  <a class="button" href="#job-search">Explore Open Positions</a>
+</section>
+
+<main>
+  <section class="search-panel" id="job-search">
+    <h2>Find the Right Trucking Job</h2>
+    <p>Search available opportunities by job title, location, or home time.</p>
+    <div class="filters">
+      <input id="search" type="search" placeholder="Job title or location">
+      <select id="homeTime">
+        <option value="">Any home time</option>
+        <option value="daily">Home daily</option>
+        <option value="weekly">Home weekly</option>
+        <option value="weekends">Home weekends</option>
+      </select>
+      <button class="button dark" onclick="loadJobs()">Refresh Jobs</button>
+    </div>
+  </section>
+
+  <div class="section-title">
+    <h2>Current Trucking Opportunities</h2>
+    <p id="jobCount">Loading available jobs...</p>
+  </div>
+
+  <section id="jobs" aria-live="polite"></section>
+
+  <section class="notice">
+    <h2>Not Sure Which Job Fits You?</h2>
+    <p>We work with over 50 carriers and want to help you find a seat that fits your life. Tell us what you are looking for, and our team can help you explore your options.</p>
+    <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdrxEsSTvTCYugn6Xaz2lUodnY4Lu8VHOrTgKqOtbpOBXhksg/viewform?usp=dialo">Get Matched With a Recruiter</a>
+  </section>
+  <p style="font-size:13px;color:#666;margin-top:18px;">Job information should be verified with a recruiter before applying. Pay, routes, qualifications and availability can change.</p>
+</main>
+
+<footer>
+  <strong>FOXX ENTERPRISE</strong><br>
+  We Care About You, Not Just the Numbers.<br>
+  Helping Truck Drivers Find a Seat That Fits Their Life.<br>
+  <a href="index.html">Back to Homepage</a>
+</footer>
+
+<script>
+const APPLICATION_URL = "https://intelliapp.driverapponline.com/c/foxxenterprisellc?r=Allison.Fox";
+const QUESTION_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSdHI6WBei7q7jTDMzurQz6Y12CpVMc8G_2RGE0Tal3ax5jqIQ/viewform?usp=publish-editor";
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[char]);
+}
+
+function homeCategory(job) {
+  const text = [job.title, job.homeTime, job.description].join(" ").toLowerCase();
+  if (text.includes("home daily")) return "daily";
+  if (text.includes("home weekly")) return "weekly";
+  if (text.includes("weekends")) return "weekends";
+  return "";
+}
+
+function getDetails(job) {
+  return [job.description, job.details, job.requirements]
+    .filter(Boolean).join(" ").toLowerCase();
+}
+
+async function loadJobs() {
+  const container = document.getElementById("jobs");
+  const count = document.getElementById("jobCount");
+  container.innerHTML = "";
+  count.textContent = "Loading available jobs...";
+
+  try {
+    const response = await fetch("jobs.json");
+    if (!response.ok) throw new Error("Could not load jobs.json");
+    const data = await response.json();
+    const jobs = Array.isArray(data) ? data : (data.jobs || []);
+    const query = document.getElementById("search").value.toLowerCase().trim();
+    const home = document.getElementById("homeTime").value;
+
+    const filtered = jobs.filter(job => {
+      if (job.active === false || job.status === "paused") return false;
+      const searchable = [
+        job.title, job.location, job.pay, job.homeTime,
+        job.freight, job.description, job.details, job.requirements
+      ].filter(Boolean).join(" ").toLowerCase();
+      return searchable.includes(query) &&
+        (!home || homeCategory(job) === home);
+    });
+
+    count.textContent = filtered.length + " job(s) found";
+    if (!filtered.length) {
+      container.innerHTML = "<p>No matching jobs found. Try another search or get matched with a recruiter.</p>";
+      return;
+    }
+
+    filtered.forEach(job => {
+      const card = document.createElement("article");
+      card.className = "job-card";
+      const title = escapeHTML(job.title || "Trucking Opportunity");
+      const pay = escapeHTML(job.pay || "");
+      const location = escapeHTML(job.location || "");
+      const homeTime = escapeHTML(job.homeTime || "");
+      const freight = escapeHTML(job.freight || "");
+      const description = escapeHTML(job.description || job.details || "");
+
+      card.innerHTML = `
+        <h3>${title}</h3>
+        <div>
+          ${location ? `<span class="tag">${location}</span>` : ""}
+          ${homeTime ? `<span class="tag">${homeTime}</span>` : ""}
+          ${freight ? `<span class="tag">${freight}</span>` : ""}
+        </div>
+        ${pay ? `<p><strong>Pay:</strong> ${pay}</p>` : ""}
+        <p>${description.replace(/\n/g, "<br>")}</p>
+        <div class="job-actions">
+          <a class="button" href="${APPLICATION_URL}">Apply Now</a>
+          <a class="button dark" href="${QUESTION_FORM}" target="_blank" rel="noopener">Ask a Question</a>
+        </div>`;
+      container.appendChild(card);
+    });
+  } catch (error) {
+    count.textContent = "Jobs could not be loaded.";
+    container.innerHTML = `
+      <p>We couldn't load the job list right now. Please try again shortly, or contact a recruiter.</p>
+      <a class="button" href="${APPLICATION_URL}">Apply Now</a>`;
+  }
+}
+
+document.getElementById("search").addEventListener("input", loadJobs);
+document.getElementById("homeTime").addEventListener("change", loadJobs);
+loadJobs();
+</script>
+</body>
+</html>
