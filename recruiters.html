@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Become a Recruiter | Foxx Enterprise</title>
+<style>
+:root {
+  --orange: #f58220;
+  --black: #111111;
+  --white: #ffffff;
+  --gray: #f4f4f4;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--gray);
+  color: var(--black);
+  line-height: 1.6;
+}
+header {
+  background: var(--black);
+  color: var(--white);
+  padding: 18px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--orange);
+}
+.logo { width: 170px; max-width: 100%; height: auto; }
+nav { display: flex; gap: 22px; flex-wrap: wrap; }
+nav a { color: white; text-decoration: none; font-weight: bold; }
+nav a:hover { color: var(--orange); }
+.hero {
+  background: linear-gradient(120deg, #111111, #292019);
+  color: white;
+  text-align: center;
+  padding: 65px 20px;
+}
+.hero h1 { font-size: clamp(32px, 5vw, 54px); line-height: 1.15; margin: 10px auto 18px; }
+.orange { color: var(--orange); }
+.hero p { max-width: 760px; margin: 0 auto 25px; font-size: 19px; }
+.btn {
+  display: inline-block;
+  background: var(--orange);
+  color: #111111;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 14px 24px;
+  border-radius: 8px;
+  margin: 6px;
+}
+.btn:hover { background: #ff9b43; }
+.container { max-width: 1100px; margin: auto; padding: 35px 20px; }
+.section-title { text-align: center; font-size: 30px; margin: 0 0 12px; }
+.intro { text-align: center; max-width: 780px; margin: 0 auto 28px; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.07);
+  border-top: 4px solid var(--orange);
+}
+.card h3 { margin-top: 0; font-size: 21px; }
+.card p { margin-bottom: 0; }
+.icon { font-size: 30px; }
+.steps { padding-left: 22px; }
+.steps li { margin: 10px 0; }
+.cta {
+  background: #171717;
+  color: white;
+  text-align: center;
+  padding: 45px 20px;
+  border-top: 4px solid var(--orange);
+}
+.cta p { max-width: 700px; margin: 12px auto 22px; }
+.note { font-size: 13px; color: #555; margin-top: 25px; }
+footer { background: #111; color: #ddd; text-align: center; padding: 22px; }
+footer a { color: var(--orange); }
+@media (max-width: 650px) {
+  header { justify-content: center; text-align: center; }
+  nav { justify-content: center; }
+  .cards { grid-template-columns: 1fr; }
+  .hero { padding: 45px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">
+    <img class="logo" src="foxx-enterprise-logo.png"
+         alt="Foxx Enterprise Truck Driver Recruiting">
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="jobs.html">Find Jobs</a>
+    <a href="#apply">Apply to Recruit</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="orange"><strong>JOIN THE FOXX ENTERPRISE RECRUITING TEAM</strong></p>
+  <h1>Help Drivers Find Their <span class="orange">Next Seat.</span></h1>
+  <p>Help truck drivers connect with trucking opportunities that fit their experience, pay goals, and home-time needs — while building your own commission-based recruiting opportunity.</p>
+  <a class="btn" href="#apply">Apply to Become a Recruiter</a>
+</section>
+
+<main>
+  <section class="container">
+    <h2 class="section-title">Why Recruit with <span class="orange">Foxx Enterprise?</span></h2>
+    <p class="intro">We believe truck drivers deserve to be treated like people, not numbers. Join a team focused on helping drivers find opportunities that work for them.</p>
+
+    <div class="cards">
+      <article class="card">
+        <div class="icon">💰</div>
+        <h3>Commission-Based Earnings</h3>
+        <p>Earn a commission for qualifying driver placements. Advertised commissions range from $300 to $2,500 per hired driver, depending on the placement and applicable commission terms. Earnings are not guaranteed.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">📋</div>
+        <h3>Leads Provided</h3>
+        <p>Connect with drivers who have already applied. Help pre-qualify them and find trucking positions that match their needs.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">📱</div>
+        <h3>A Phone or a Way to Make Calls</h3>
+        <p>All you need is a phone or another way to make calls so you can communicate with drivers and follow up with them.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">💻</div>
+        <h3>A Computer</h3>
+        <p>Use a computer to review leads, help drivers complete applications, track follow-ups, and stay organized.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">🏡</div>
+        <h3>Work Remotely</h3>
+        <p>Recruit from home or wherever you work best. No office is required for this opportunity.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">🗓️</div>
+        <h3>Flexible Schedule</h3>
+        <p>Organize your work around your schedule and goals. Consistent follow-up and communication help keep drivers moving through the process.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2 class="section-title">What Will You Do?</h2>
+    <div class="card">
+      <ol class="steps">
+        <li>Speak with drivers who have already applied.</li>
+        <li>Pre-qualify drivers and match them with suitable positions.</li>
+        <li>Help drivers understand job requirements and complete applications.</li>
+        <li>Follow up with drivers and help coordinate orientation scheduling.</li>
+        <li>Communicate with carrier hiring teams throughout the recruiting process.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2 class="section-title">Training, Tools & Support</h2>
+    <p class="intro">Foxx Enterprise provides recruiting resources, training, and support to help you understand the process and stay organized as you work with drivers.</p>
+  </section>
+
+  <section class="cta" id="apply">
+    <h2>Ready to Join Foxx Enterprise?</h2>
+    <p>If you're motivated, organized, and enjoy communicating with people, take the next step and submit your recruiter application.</p>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeA6085cQEyh5dLSmWdVWl0i4_POwbK4G0ZBXu6nLvxB42zhQ/viewform?usp=header" target="_blank" rel="noopener">Apply to Become a Recruiter</a>
+    <p class="note" style="color:#dddddd;">This is a commission-based 1099 independent-contractor opportunity. Earnings are not guaranteed and depend on qualifying placements and applicable commission terms.</p>
+  </section>
+</main>
+
+<footer>
+  <p><strong>Foxx Enterprise</strong> — Helping Truck Drivers Find a Seat That Fits Their Life.</p>
+  <p><a href="index.html">Home</a> &nbsp;|&nbsp; <a href="jobs.html">Find Jobs</a></p>
+</footer>
+
+</body>
+</html>
