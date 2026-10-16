@@ -14,8 +14,13 @@ header{display:flex;align-items:center;justify-content:space-between;gap:24px;pa
 .logo{width:260px;max-width:40%;height:auto;object-fit:contain}
 nav{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;border:2px solid #ff790e;border-radius:40px;padding:15px 25px}
 nav a:hover{color:#ff790e}
-.hero{min-height:430px;padding:55px 5%;display:flex;align-items:center;background:radial-gradient(ellipse at 80% 45%,#713000 0%,#25201b 28%,#090909 68%)}
-.hero-content{max-width:680px}
+.hero{
+  min-height:430px;
+  padding:55px 5%;
+  display:flex;
+  align-items:center;
+  background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.55) 48%,rgba(0,0,0,.08) 100%),url('/sunset-truck.png') center 55%/cover no-repeat;
+}.hero-content{max-width:680px}
 .hero h1{font-size:clamp(38px,6vw,70px);line-height:.98;font-style:italic;font-weight:900;margin:0 0 20px}
 .hero p{font-size:21px;line-height:1.5;max-width:500px}
 .btn{display:inline-block;background:#ff790e;color:#090909;padding:17px 24px;border-radius:13px;font-size:18px;font-weight:800;margin-top:12px}
