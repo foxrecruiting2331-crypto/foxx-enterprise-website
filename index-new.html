@@ -1,0 +1,196 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Foxx Enterprise | Truck Driver Jobs</title>
+<style>
+:root{--o:#f58220;--b:#090909;--d:#171717;--w:#fff;--m:#aaa}*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--w);font:16px Arial,sans-serif}a{color:inherit;text-decoration:none}.top{text-align:center;background:var(--o);color:#111;padding:9px;font-weight:800}header{background:#0d0d0d;border-bottom:1px solid #333}.nav,.wrap{max-width:1180px;margin:auto;padding:18px 22px}.nav{display:flex;justify-content:space-between;align-items:center}.logo{font-size:25px;font-weight:900}.logo span{color:var(--o)}nav{display:flex;gap:22px;font-weight:bold}nav a:hover{color:var(--o)}.hero{padding:70px 22px 55px;background:linear-gradient(135deg,#111,#2b1809)}.hero .wrap{padding:0}.eyebrow{color:var(--o);font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:13px}h1{font-size:clamp(42px,6vw,70px);line-height:1;margin:14px 0;max-width:850px}.hero p{max-width:720px;color:#ddd;font-size:19px;line-height:1.55}.btn{display:inline-block;padding:12px 17px;border-radius:8px;font-weight:900;border:1px solid #444;margin:5px 5px 0 0}.primary{background:var(--o);color:#111;border-color:var(--o)}.secondary{background:#222;color:#fff;border-color:#444}.search,.card,.panel{background:var(--d);border:1px solid #333;border-radius:14px;padding:20px}.search{margin:20px 0}.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px}input,select{width:100%;padding:13px;background:#0d0d0d;border:1px solid #444;color:white;border-radius:8px}.jobs{display:grid;grid-template-columns:1fr 1fr;gap:15px}.card h3{margin:0;font-size:21px}.pay{color:#ff9b45;font-weight:900;margin:10px 0}.badges{display:flex;gap:7px;flex-wrap:wrap}.badge{background:#292929;padding:5px 8px;border-radius:20px;font-size:12px}.badge.o{background:#3b220e;color:#ffb06c}.card p,.card li,.panel p{color:#ccc;line-height:1.5}.two{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:30px}footer{margin-top:35px;border-top:1px solid #333;color:#aaa}.small{font-size:13px;color:#888}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:50;padding:30px 18px;overflow:auto}
+.modal.show{display:flex;align-items:center;justify-content:center}
+.modal-box{width:min(760px,100%);background:#171717;border:1px solid #444;border-radius:16px;padding:26px;position:relative;box-shadow:0 20px 70px rgba(0,0,0,.6)}
+.modal-close{position:absolute;right:15px;top:10px;background:#292929;color:#fff;border:0;border-radius:50%;width:38px;height:38px;font-size:24px;cursor:pointer}
+.modal-box h2{margin:0 45px 8px 0;font-size:30px}.modal-pay{color:#ff9b45;font-weight:900;font-size:18px;margin:8px 0 16px}.modal-box h4{margin-bottom:6px}.modal-box ul{color:#ccc;line-height:1.6}.modal-meta{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.modal-meta span{background:#292929;padding:7px 10px;border-radius:20px;font-size:13px}
+@media(max-width:800px){nav{display:none}.filters,.jobs,.two,#driverForm{grid-template-columns:1fr!important}}
+</style></head><body>
+<div class="top">🚛 Helping Truck Drivers Find a Seat That Fits Them Best</div><header><div class="nav"><img src="/foxx-enterprise-logo.png" alt="Foxx Enterprise Truck Driver Recruiting" style="width:320px; height:auto; display:block; object-fit:contain;"><nav><a 
+<a href="recruiters.html">Become a Recruiter</a>
+<a href="jobs.html">Truck Driver Jobs</a><a href="recruiters.html">Become a Recruiter</a><a href="#recruiters">Recruiters</a><a href="#about">About</a><a href="contact.html">Contact</a></nav></div></header><section class="hero"><div class="wrap"><div class="eyebrow">Truck Driver Recruiting & Job Matching</div><h1>Find a trucking job that fits your life.</h1><p>Search opportunities by location, home time, freight and pay. We work with carriers to help drivers find a seat that fits them best.</p><a class="btn primary" href="/jobs.html">🔎 Search Driver Jobs</a></div></section>
+<main class="wrap" id="jobs"><h2>Find Your Next Seat</h2><div class="search"><div class="filters"><input id="q" placeholder="City, state or keyword"><select id="state"><option value="">All states</option><option>California</option><option>Florida</option><option>New Jersey</option><option>Multiple</option></select><select id="home"><option value="">Any home time</option><option>Home Daily</option><option>Home Weekly</option><option>Home Weekends</option></select><select id="freight"><option value="">Any freight</option><option>No Touch</option><option>Touch Freight</option></select></div></div><div id="jobsList" class="jobs"></div>
+
+<section class="wrap" id="driver-application" style="padding-top:10px">
+<div class="panel">
+<h2>🚛 Let Foxx Enterprise Find Your Next Seat</h2>
+<p>Can't find the right job? Tell us what you're looking for and we'll help match you with an opportunity.</p>
+<div style="text-align:center;padding:15px 0">
+  <p style="margin-bottom:18px">
+    Not ready to apply yet? Tell us what you're looking for and let a Foxx Enterprise recruiter help you find a seat that fits you best.
+  </p>
+
+<a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdrxEsSTvTCYugn6Xaz2lUodnY4Lu8VHOrTgKqOtbpOBXhksg/viewform?usp=dialo" style="display:inline-block;text-decoration:none">    🚛 Get Matched With a Recruiter</a>
+  
+
+
+
+
+ 
+</div>
+</div>
+</section>
+
+
+
+<section id="about" class="wrap" style="padding:45px 20px;">
+  <div class="panel" style="padding:30px;">
+    <h2 style="color:#f58220;">About Foxx Enterprise</h2>
+
+    <p>At <strong>Foxx Enterprise</strong>, we believe truck drivers deserve more than just a job — they deserve an opportunity that fits their lifestyle, goals, and family needs.</p>
+
+    <p>We specialize in connecting truck drivers with trucking opportunities that match their experience, qualifications, preferred home time, and pay expectations. We work with over 50 carriers, giving drivers access to a variety of local, regional, and over-the-road positions.</p>
+
+    <p>Our mission is simple: <strong>help drivers find the right seat without treating them like just another number.</strong> We take the time to understand what matters most to each driver and help them explore opportunities that work best for them.</p>
+
+    <p>We also welcome motivated individuals who want to become part of our recruiting team. Our recruiter opportunities offer commission-based earning potential, training, resources, and support to help recruiters connect drivers with available positions.</p>
+
+    <p>At Foxx Enterprise, we believe in building relationships, creating opportunities, and putting people first.</p>
+
+    <h3 style="color:#f58220;">Foxx Enterprise — We Care About You, Not Just the Numbers.</h3>
+
+    <p><em>Helping truck drivers find a seat that fits their life.</em></p>
+<p class="small">Job information should be verified with a recruiter before applying. Pay, routes, qualifications and availability can change.</p></section>
+</main>
+<footer><div class="wrap"><b>FOXX ENTERPRISE</b><br>Call/Text: <b>640-248-1027</b> • Allison.Fox@foxxenterprisellc.com<br><span class="small">© 2026 Foxx Enterprise</span></div></footer>
+
+<div class="modal" id="jobModal" aria-hidden="true">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeJob()" aria-label="Close">×</button>
+    <div id="jobDetails"></div>
+  </div>
+</div>
+
+
+<script>
+const apply = "https://intelliapp.driverapponline.com/c/foxxenterprisellc?r=Allison.Fox";
+
+const questionForm = "https://docs.google.com/forms/d/e/1FAIpQLSdHI6WBei7q7jTDMzurQz6Y12CpVMc8G_2RGE0Tal3ax5jqIQ/viewform?usp=publish-editor";
+
+let jobs = [];
+
+async function load() {
+  try {
+    const response = await fetch("jobs.json");
+    if (!response.ok) throw new Error("Could not load jobs.json");
+    jobs = await response.json();
+    filter();
+  } catch (error) {
+    document.querySelector("#jobsList").innerHTML =
+      '<div class="panel">We are having trouble loading our job listings. Please refresh the page or contact Foxx Enterprise.</div>';
+    console.error(error);
+  }
+}
+
+function viewJob(id) {
+  const j = jobs.find(x => String(x.id) === String(id));
+  if (!j) return;
+
+  document.getElementById("jobDetails").innerHTML = `
+    <h2>${j.title}</h2>
+    <div class="modal-pay">${j.pay}</div>
+    <div class="modal-meta">
+      <span>${j.home}</span>
+      <span>${j.freight}</span>
+      <span>${j.location}</span>
+    </div>
+    <p><b>Experience:</b> ${j.experience}</p>
+    <h4>Job Details</h4>
+    <ul>${j.details.map(x => `<li>${x}</li>`).join("")}</ul>
+    <div style="margin-top:18px">
+      <a class="btn primary" href="${apply}" target="_blank" rel="noopener">Apply Now</a>
+      <a class="btn secondary" href="${questionForm}" target="_blank" rel="noopener">Ask a Question</a>
+    </div>
+  `;
+
+  const modal = document.getElementById("jobModal");
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeJob() {
+  const modal = document.getElementById("jobModal");
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+document.getElementById("jobModal").addEventListener("click", e => {
+  if (e.target.id === "jobModal") closeJob();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeJob();
+});
+
+function filter() {
+  const q = document.querySelector("#q").value.toLowerCase();
+  const s = document.querySelector("#state").value;
+  const h = document.querySelector("#home").value;
+  const f = document.querySelector("#freight").value;
+
+  const filteredJobs = jobs.filter(j =>
+    (!q || JSON.stringify(j).toLowerCase().includes(q)) &&
+    (!s || j.state === s) &&
+    (!h || j.home === h) &&
+    (!f || j.freight === f)
+  );
+
+  document.querySelector("#jobsList").innerHTML =
+    filteredJobs.map(j => `
+      <article class="card">
+        <h3>${j.title}</h3>
+        <div class="pay">${j.pay}</div>
+        <div class="badges">
+          <span class="badge o">${j.home}</span>
+          <span class="badge">${j.freight}</span>
+          <span class="badge">${j.location}</span>
+        </div>
+        <p><b>Experience:</b> ${j.experience}</p>
+        <ul>${j.details.slice(0, 3).map(x => `<li>${x}</li>`).join("")}</ul>
+        <button class="btn secondary" onclick="viewJob('${j.id}')">View Job Details</button>
+        <a class="btn primary" href="${apply}" target="_blank" rel="noopener">Apply Now</a>
+        <a class="btn secondary" href="${questionForm}" target="_blank" rel="noopener">Ask a Question</a>
+      </article>
+    `).join("") ||
+    '<div class="panel">No jobs match those filters. Contact us and we will help find a match.</div>';
+}
+
+["q", "state", "home", "freight"].forEach(id => {
+  document.querySelector("#" + id).addEventListener("input", filter);
+  document.querySelector("#" + id).addEventListener("change", filter);
+});
+
+const driverForm = document.getElementById("driverForm");
+if (driverForm) driverForm.addEventListener("submit", function(e) {  e.preventDefault();
+
+  const d = new FormData(this);
+  const subject = encodeURIComponent(
+    "New Driver Job Match Request - " + d.get("name")
+  );
+
+  const body = encodeURIComponent(
+    "Name: " + d.get("name") + "\n" +
+    "Phone: " + d.get("phone") + "\n" +
+    "Email: " + d.get("email") + "\n" +
+    "ZIP: " + d.get("zip") + "\n" +
+    "CDL Experience: " + d.get("experience") + "\n" +
+    "Preferred Home Time: " + d.get("home") + "\n" +
+    "Preferred Freight: " + d.get("freight") + "\n" +
+    "Desired Pay: " + d.get("pay") + "\n" +
+    "Notes: " + d.get("notes")
+  );
+
+  window.location.href =
+    "mailto:Allison.Fox@foxxenterprisellc.com?subject=" +
+    subject + "&body=" + body;
+
+  document.getElementById("formMessage").textContent =
+    "Your email app should open with your job-match request ready to send.";
+});
+
+load();
+</script>
+</body>
+</html>
