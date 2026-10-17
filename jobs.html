@@ -314,18 +314,37 @@ async function loadJobs() {
     if (!response.ok) throw new Error("Could not load jobs.json");
     const data = await response.json();
     const jobs = Array.isArray(data) ? data : (data.jobs || []);
-    const query = document.getElementById("search").value.toLowerCase().trim();
-    const home = document.getElementById("homeTime").value;
+    
+   
+const query = document.getElementById("search").value.toLowerCase().trim();
+const zip = document.getElementById("zipCode").value.trim();
+const state = document.getElementById("state").value.toLowerCase();
+const experience = document.getElementById("experience").value;
+const runType = document.getElementById("runType").value.toLowerCase();
+const freight = document.getElementById("touchFreight").value;
+const home = document.getElementById("homeTime").value;
 
-    const filtered = jobs.filter(job => {
-      if (job.active === false || job.status === "paused") return false;
-      const searchable = [
-        job.title, job.location, job.pay, job.homeTime,
-        job.freight, job.description, job.details, job.requirements
-      ].filter(Boolean).join(" ").toLowerCase();
-      return searchable.includes(query) &&
-        (!home || homeCategory(job) === home);
-    });
+const filtered = jobs.filter(job => {
+  if (job.active === false || job.status === "paused") return false;
+
+  const searchable = [
+    job.title, job.location, job.pay, job.homeTime,
+    job.freight, job.description, job.details, job.requirements,
+    job.state, job.zipCode, job.experience, job.runType
+  ].filter(Boolean).join(" ").toLowerCase();
+
+  if (query && !searchable.includes(query)) return false;
+  if (state && !String(job.state || job.location || "").toLowerCase().includes(state)) return false;
+  if (zip && !String(job.zipCode || job.location || "").includes(zip)) return false;
+  if (experience && Number(job.experience || 0) < Number(experience)) return false;
+  if (runType && !String(job.runType || job.title || job.description || "").toLowerCase().includes(runType)) return false;
+  if (freight === "no-touch" && !/no.touch/i.test(String(job.freight || job.description || job.details || ""))) return false;
+  if (freight === "touch" && !/\btouch\b/i.test(String(job.freight || job.description || job.details || ""))) return false;
+  if (home && homeCategory(job) !== home) return false;
+
+  return true;
+});
+
 
     count.textContent = filtered.length + " job(s) found";
     if (!filtered.length) {
@@ -366,8 +385,15 @@ async function loadJobs() {
   }
 }
 
+
 document.getElementById("search").addEventListener("input", loadJobs);
+document.getElementById("zipCode").addEventListener("input", loadJobs);
+document.getElementById("state").addEventListener("change", loadJobs);
+document.getElementById("experience").addEventListener("change", loadJobs);
+document.getElementById("runType").addEventListener("change", loadJobs);
+document.getElementById("touchFreight").addEventListener("change", loadJobs);
 document.getElementById("homeTime").addEventListener("change", loadJobs);
+
 loadJobs();
 </script>
 </body>
