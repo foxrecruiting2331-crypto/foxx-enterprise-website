@@ -168,6 +168,14 @@ footer a { color: var(--orange); }
 <input id="search" type="search" placeholder="Job title or keyword">
 
 <input id="zipCode" type="text" placeholder="ZIP code">
+      <select id="radius">
+  <option value="10">Within 10 miles</option>
+  <option value="25">Within 25 miles</option>
+  <option value="50" selected>Within 50 miles</option>
+  <option value="75">Within 75 miles</option>
+  <option value="100">Within 100 miles</option>
+  <option value="250">Within 250 miles</option>
+</select>
 
 <select id="state">
   <option value="">All States</option>
@@ -341,7 +349,7 @@ const experience = document.getElementById("experience").value;
 const runType = document.getElementById("runType").value.toLowerCase();
 const freight = document.getElementById("touchFreight").value;
 const home = document.getElementById("homeTime").value;
-
+const radius = Number(document.getElementById("radius").value);
 
 const filtered = jobs.filter(job => {
   if (job.active === false || job.status === "paused") return false;
