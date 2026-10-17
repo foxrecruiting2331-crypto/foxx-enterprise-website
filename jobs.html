@@ -290,13 +290,31 @@ function escapeHTML(value) {
   })[char]);
 }
 
+
 function homeCategory(job) {
-  const text = [job.title, job.homeTime, job.description].join(" ").toLowerCase();
-  if (text.includes("home daily")) return "daily";
-  if (text.includes("home weekly")) return "weekly";
-  if (text.includes("weekends")) return "weekends";
+  const text = [
+    job.title,
+    job.home,
+    job.homeTime,
+    job.description,
+    ...(Array.isArray(job.details) ? job.details : [])
+  ].filter(Boolean).join(" ").toLowerCase();
+
+  if (text.includes("home daily") || text.includes("home-daily")) {
+    return "daily";
+  }
+
+  if (text.includes("home weekly") || text.includes("home-weekly")) {
+    return "weekly";
+  }
+
+  if (text.includes("home weekends") || text.includes("home-weekends")) {
+    return "weekends";
+  }
+
   return "";
 }
+
 
 function getDetails(job) {
   return [job.description, job.details, job.requirements]
@@ -324,26 +342,63 @@ const runType = document.getElementById("runType").value.toLowerCase();
 const freight = document.getElementById("touchFreight").value;
 const home = document.getElementById("homeTime").value;
 
+
 const filtered = jobs.filter(job => {
   if (job.active === false || job.status === "paused") return false;
 
   const searchable = [
-    job.title, job.location, job.pay, job.homeTime,
-    job.freight, job.description, job.details, job.requirements,
-    job.state, job.zipCode, job.experience, job.runType
-  ].filter(Boolean).join(" ").toLowerCase();
+    job.title,
+    job.location,
+    job.pay,
+    job.home,
+    job.homeTime,
+    job.freight,
+    job.description,
+    job.details,
+    job.requirements,
+    job.state,
+    job.zipCode,
+    job.experience,
+    job.runType
+  ].flat(Infinity).filter(Boolean).join(" ").toLowerCase();
 
   if (query && !searchable.includes(query)) return false;
-  if (state && !String(job.state || job.location || "").toLowerCase().includes(state)) return false;
-  if (zip && !String(job.zipCode || job.location || "").includes(zip)) return false;
-  if (experience && Number(job.experience || 0) < Number(experience)) return false;
-  if (runType && !String(job.runType || job.title || job.description || "").toLowerCase().includes(runType)) return false;
-  if (freight === "no-touch" && !/no.touch/i.test(String(job.freight || job.description || job.details || ""))) return false;
-  if (freight === "touch" && !/\btouch\b/i.test(String(job.freight || job.description || job.details || ""))) return false;
+
+  const jobState = String(job.state || "").toLowerCase();
+  if (state && jobState !== state) return false;
+
+  const jobZip = String(job.zipCode || "");
+  if (zip && !jobZip.startsWith(zip)) return false;
+
+  if (experience) {
+    const experienceText = String(job.experience || "").toLowerCase();
+    const monthsMatch = experienceText.match(/(\d+)\s*months?/);
+    const yearsMatch = experienceText.match(/(\d+)\s*years?/);
+
+    let monthsRequired = monthsMatch ? Number(monthsMatch[1]) : 0;
+    if (yearsMatch) monthsRequired = Number(yearsMatch[1]) * 12;
+
+    if (!monthsMatch && !yearsMatch) {
+      if (!experienceText.includes(experience.toLowerCase())) return false;
+    } else if (monthsRequired < Number(experience)) {
+      return false;
+    }
+  }
+
+  if (runType && !String(job.runType || job.title || job.location || "").toLowerCase().includes(runType)) {
+    return false;
+  }
+
+  const freightText = String(job.freight || job.description || job.details || "").toLowerCase();
+
+  if (freight === "no-touch" && !freightText.includes("no touch")) return false;
+  if (freight === "touch" && !freightText.includes("touch freight")) return false;
+
   if (home && homeCategory(job) !== home) return false;
 
   return true;
 });
+
 
 
     count.textContent = filtered.length + " job(s) found";
