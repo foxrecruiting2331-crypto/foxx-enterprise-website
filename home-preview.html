@@ -77,7 +77,7 @@ nav a:hover { color: var(--orange); }
   padding: 60px 6%;
   background:
     linear-gradient(90deg, rgba(0,0,0,.96) 0%, rgba(0,0,0,.80) 38%, rgba(0,0,0,.13) 100%),
-    url("/foxx-enterprise-logo.png") center / contain no-repeat,
+    url("/sunset-truck.png") center / cover no-repeat,
     #20150e;
 }
 .hero-content { max-width: 680px; }
@@ -152,10 +152,16 @@ grid-template-columns: 1fr 1fr;   background: #111;
   border-top: 1px solid #333;
 }
 .about-art {
-min-height: 310px;
-display: flex;
-align-items: center; background: linear-gradient(110deg, #090909 0%, #202020 55%, #713000 100%);
-.about-text { padding: 45px 7%; align-self: center; }
+  min-height: 310px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(110deg, #090909 0%, #202020 55%, #713000 100%);
+}
+
+.about-text {
+  padding: 45px 7%;
+  align-self: center;
+}
 .about h2 { font-size: clamp(28px, 4vw, 42px); margin: 0 0 15px; }
 .about p { color: #ddd; line-height: 1.8; }
 footer {
