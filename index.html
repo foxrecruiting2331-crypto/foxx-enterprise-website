@@ -116,5 +116,70 @@ footer{text-align:center;border-top:1px solid #333;padding:25px 15px;color:#ccc;
 <strong class="orange">FOXX ENTERPRISE</strong> — Helping truck drivers find a seat that fits their life.<br>
 Job information should be verified with a recruiter before applying. Pay, routes, qualifications and availability can change.
 </footer>
+
+<section id="driver-reviews" style="background:#111;color:#fff;padding:55px 20px;text-align:center;">
+  <div style="max-width:1000px;margin:auto;">
+    <h2 style="color:#ff790e;font-size:32px;">Driver Reviews</h2>
+    <p>Real experiences. Honest feedback. Helping drivers find the right seat.</p>
+
+    <div id="reviews-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;text-align:left;margin:30px 0;">
+      <p>Loading driver reviews...</p>
+    </div>
+
+    <p style="margin-top:24px;">
+      Have you worked with Foxx Enterprise?
+    </p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfmGEi0SYTAS7JWwxbDlkudfdyg-WBOkDUddgPYNqU4s0l5Xw/viewform?usp=header"
+       style="display:inline-block;background:#ff790e;color:#111;padding:13px 24px;border-radius:6px;text-decoration:none;font-weight:bold;">
+      Leave a Review
+    </a>
+  </div>
+</section>
+
+<script>
+fetch('/reviews.json')
+  .then(response => {
+    if (!response.ok) throw new Error('Reviews unavailable');
+    return response.json();
+  })
+  .then(reviews => {
+    const list = document.getElementById('reviews-list');
+    list.replaceChildren();
+
+    const approved = reviews.filter(review =>
+      review.status === 'approved'
+    );
+
+    if (!approved.length) {
+      list.textContent = 'Be the first to share your experience!';
+      return;
+    }
+
+    approved.forEach(review => {
+      const card = document.createElement('article');
+      card.style.cssText =
+        'background:#222;padding:22px;border-radius:10px;border:1px solid #ff790e;';
+
+      const stars = document.createElement('p');
+      stars.style.color = '#ff790e';
+      const rating = Math.max(0, Math.min(5, Number(review.rating) || 0));
+      stars.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+      const heading = document.createElement('h3');
+      heading.textContent = review.name || 'Foxx Enterprise Driver';
+
+      const comment = document.createElement('p');
+      comment.textContent = review.review || '';
+
+      card.append(stars, heading, comment);
+      list.appendChild(card);
+    });
+  })
+  .catch(() => {
+    document.getElementById('reviews-list').textContent =
+      'Driver reviews will be available soon.';
+  });
+</script>
+
 </body>
 </html>
