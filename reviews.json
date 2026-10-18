@@ -1,12 +1,6 @@
 [
   {
     "status": "approved",
-    "name": "Test T.",
-    "rating": 5,
-    "review": "test"
-  },
-  {
-    "status": "approved",
     "name": "test T.",
     "rating": 3,
     "review": "nc"
