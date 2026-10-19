@@ -56,19 +56,21 @@ a{text-decoration:none;color:inherit}
 
 
 
+
 header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 24px;
   width: 100%;
   max-width: none;
   margin: 0;
   box-sizing: border-box;
-  padding: 20px 2%;
+  padding: 20px 3%;
   background: #080808;
 }
+
 
 
 
@@ -154,13 +156,17 @@ header {
     box-sizing: border-box;
 }
 
+
 .logo {
-    width: 300px;
-    max-width: 40%;
-    height: auto;
-    object-fit: contain;
-    margin-right: auto;
+  display: block;
+  width: 300px;
+  max-width: 40%;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin: 0;
 }
+
 
 </style>
 </head>
