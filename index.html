@@ -59,6 +59,7 @@ a{text-decoration:none;color:inherit}
 
 
 
+
 header {
   display: flex;
   flex-direction: row;
@@ -68,21 +69,10 @@ header {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 15px 4%;
+  padding: 15px 3%;
   box-sizing: border-box;
   background: #080808;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .logo {
   display: block;
@@ -94,24 +84,27 @@ header {
   margin: 0;
 }
 
-
-
-
-
 nav {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 18px;
-    border: 2px solid #ff790e;
-    border-radius: 40px;
-    padding: 15px 20px;
-    margin-left: auto;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  border: 2px solid #ff790e;
+  border-radius: 40px;
+  padding: 15px 20px;
+  margin-left: auto;
 }
 
-nav a:hover{color:#ff790e}
+nav a {
+  white-space: nowrap;
+}
+
+nav a:hover {
+  color: #ff790e;
+}
+
 .hero{
   min-height:430px;
   padding:55px 5%;
