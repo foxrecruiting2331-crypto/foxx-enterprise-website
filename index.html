@@ -8,10 +8,18 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#090909;color:#fff;font-family:Arial,sans-serif}
-  body {
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
+ html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 
@@ -42,11 +50,12 @@ header {
 
 
 .logo {
-  width: 260px;
-max-width: 260px;
-  height: auto;
-  object-fit: contain;
-  flex-shrink: 0;
+    display: block;
+    width: 260px;
+    max-width: 35%;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
 nav {
