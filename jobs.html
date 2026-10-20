@@ -73,14 +73,21 @@ main { max-width: 1150px; margin: auto; padding: 30px 20px 55px; }
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 12px;
 }
+
 input, select {
   width: 100%;
+  min-width: 0;
   padding: 13px;
   border: 1px solid #ccc;
   border-radius: 7px;
   font-size: 15px;
-  background: white;
+  color: #111111;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  min-height: 50px;
+  appearance: auto;
 }
+
 .section-title { margin: 35px 0 18px; }
 #jobCount { color: #555; }
 #jobs {
