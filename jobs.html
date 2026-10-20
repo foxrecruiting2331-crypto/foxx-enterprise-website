@@ -685,11 +685,18 @@ filtered.forEach(job => {
     .map(item => String(item).trim())
     .filter(Boolean);
 
-  const summary = detailLines
-    .filter(line => !/^(\*\*)?(qualifications|requirements|pay|home time|freight):?(\*\*)?$/i.test(line))
-    .slice(0, 2)
-    .map(line => escapeHTML(line.replace(/^\s*[-•]\s*/, "")))
-    .join(" ");
+  
+const summary = detailLines
+  .filter(line =>
+    !/^(qualifications|requirements|pay|home time|freight):?/i.test(line.trim())
+  )
+  .filter(line =>
+    !/^(home daily|home weekly|home weekends|no touch|no-touch freight|touch freight)$/i.test(line.trim())
+  )
+  .slice(0, 2)
+  .map(line => escapeHTML(line.replace(/^\s*[-•]\s*/, "")))
+  .join(" ");
+
 
   const tags = [
     location ? `<span class="tag">${location}</span>` : "",
