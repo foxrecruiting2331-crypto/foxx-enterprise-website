@@ -88,30 +88,101 @@ input, select {
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 20px;
 }
+
 .job-card {
-  background: white;
+  background: var(--white);
   padding: 22px;
   border-radius: 12px;
+  border: 1px solid #e5e5e5;
   border-top: 5px solid var(--orange);
-  box-shadow: 0 3px 14px #00000010;
+  box-shadow: 0 4px 15px #0000000d;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
-.job-card h3 { margin: 0; font-size: 21px; }
-.job-card p { line-height: 1.55; margin: 0; color: #444; }
-.tag {
-  display: inline-block;
-  background: #fff0e2;
-  color: #8a3b00;
-  padding: 6px 9px;
-  border-radius: 20px;
-  font-size: 12px;
+
+.job-card:hover {
+  box-shadow: 0 7px 22px #00000016;
+  transform: translateY(-2px);
+}
+
+.job-card h3 {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--orange);
+}
+
+.job-card p {
+  line-height: 1.6;
+  margin: 0;
+  color: #444;
+}
+
+.job-pay {
+  font-size: 19px;
   font-weight: bold;
-  margin: 0 5px 5px 0;
+  color: var(--black);
 }
-.job-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 8px; }
-.job-actions .button { text-align: center; flex: 1; }
+
+.job-summary {
+  font-size: 14px;
+}
+
+.job-details {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 14px;
+  margin-top: 2px;
+}
+
+.job-details ul {
+  padding-left: 20px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.job-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.job-actions .button {
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.details-button {
+  background: var(--black);
+  color: white;
+}
+
+.details-button:hover {
+  background: #333;
+}
+
+@media (max-width: 600px) {
+  #jobs {
+    grid-template-columns: 1fr;
+  }
+
+  .job-card {
+    padding: 18px;
+  }
+
+  .job-actions {
+    flex-direction: column;
+  }
+
+  .job-actions .button {
+    width: 100%;
+  }
+}
+
 .notice {
   background: white;
   padding: 22px;
@@ -415,31 +486,88 @@ const filtered = jobs.filter(job => {
       return;
     }
 
-    filtered.forEach(job => {
-      const card = document.createElement("article");
-      card.className = "job-card";
-      const title = escapeHTML(job.title || "Trucking Opportunity");
-      const pay = escapeHTML(job.pay || "");
-      const location = escapeHTML(job.location || "");
-      const homeTime = escapeHTML(job.homeTime || "");
-      const freight = escapeHTML(job.freight || "");
-      const description = escapeHTML(job.description || job.details || "");
 
-      card.innerHTML = `
-        <h3>${title}</h3>
-        <div>
-          ${location ? `<span class="tag">${location}</span>` : ""}
-          ${homeTime ? `<span class="tag">${homeTime}</span>` : ""}
-          ${freight ? `<span class="tag">${freight}</span>` : ""}
-        </div>
-        ${pay ? `<p><strong>Pay:</strong> ${pay}</p>` : ""}
-        <p>${description.replace(/\n/g, "<br>")}</p>
-        <div class="job-actions">
-          <a class="button" href="${APPLICATION_URL}">Apply Now</a>
-          <a class="button dark" href="${QUESTION_FORM}" target="_blank" rel="noopener">Ask a Question</a>
-        </div>`;
-      container.appendChild(card);
-    });
+filtered.forEach(job => {
+  const card = document.createElement("article");
+  card.className = "job-card";
+
+  const title = escapeHTML(job.title || "Trucking Opportunity");
+  const pay = escapeHTML(job.pay || "Pay discussed with recruiter");
+  const location = escapeHTML(job.location || job.state || "Location varies");
+  const homeTime = escapeHTML(job.home || job.homeTime || "");
+  const freight = escapeHTML(job.freight || "");
+  const experience = escapeHTML(job.experience || "");
+
+  const rawDetails = [
+    job.description,
+    ...(Array.isArray(job.details) ? job.details : [job.details]),
+    ...(Array.isArray(job.requirements) ? job.requirements : [job.requirements])
+  ].filter(Boolean);
+
+  const detailLines = [...new Set(rawDetails)]
+    .map(item => String(item).trim())
+    .filter(Boolean);
+
+  const summary = detailLines
+    .filter(line => !/^(\*\*)?(qualifications|requirements|pay|home time|freight):?(\*\*)?$/i.test(line))
+    .slice(0, 2)
+    .map(line => escapeHTML(line.replace(/^\s*[-•]\s*/, "")))
+    .join(" ");
+
+  const tags = [
+    location ? `<span class="tag">${location}</span>` : "",
+    homeTime ? `<span class="tag">${homeTime}</span>` : "",
+    freight ? `<span class="tag">${freight}</span>` : "",
+    experience ? `<span class="tag">${experience}</span>` : ""
+  ].filter(Boolean).join("");
+
+  const fullDetails = detailLines.length
+    ? `<ul>${detailLines.map(line =>
+        `<li>${escapeHTML(line.replace(/^\s*[-•]\s*/, ""))}</li>`
+      ).join("")}</ul>`
+    : "<p>Please contact a recruiter for full job requirements.</p>";
+
+  const detailsId = "job-details-" +
+    String(job.id || Math.random().toString(36).slice(2)).replace(/[^a-zA-Z0-9_-]/g, "");
+
+  card.innerHTML = `
+    <h3>${title}</h3>
+    <div>${tags}</div>
+    <p class="job-pay">${pay}</p>
+    <p class="job-summary">${summary || "Explore this trucking opportunity and see if it fits your needs."}</p>
+
+    <div class="job-actions">
+      <button class="button details-button" type="button"
+        aria-expanded="false" aria-controls="${detailsId}">
+        View Details
+      </button>
+    </div>
+
+    <div class="job-details" id="${detailsId}" hidden>
+      <h4>Full Job Details</h4>
+      ${fullDetails}
+      <div class="job-actions">
+        <a class="button" href="${APPLICATION_URL}"
+          target="_blank" rel="noopener">Apply Now</a>
+        <a class="button dark" href="${QUESTION_FORM}"
+          target="_blank" rel="noopener">Ask a Question</a>
+      </div>
+    </div>
+  `;
+
+  const detailsButton = card.querySelector(".details-button");
+  const detailsPanel = card.querySelector(".job-details");
+
+  detailsButton.addEventListener("click", () => {
+    const isExpanded = detailsButton.getAttribute("aria-expanded") === "true";
+    detailsButton.setAttribute("aria-expanded", String(!isExpanded));
+    detailsButton.textContent = isExpanded ? "View Details" : "Hide Details";
+    detailsPanel.hidden = isExpanded;
+  });
+
+  container.appendChild(card);
+});
+
   } catch (error) {
     count.textContent = "Jobs could not be loaded.";
     container.innerHTML = `
