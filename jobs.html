@@ -110,6 +110,33 @@ border-top: none;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
+/* Make job titles stand out */
+.job-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111111;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Make job pay easier to spot */
+.job-card .job-pay {
+  display: inline-block;
+  color: #b45309;
+  background: #fff0e2;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 17px;
+  margin: 4px 0 10px;
+}
+
+/* Improve readability of job details */
+.job-card p {
+  line-height: 1.65;
+}
+
 .job-card:hover {
   box-shadow: 0 7px 22px #00000016;
   transform: translateY(-2px);
