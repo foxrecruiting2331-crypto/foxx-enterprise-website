@@ -88,6 +88,92 @@ footer a { color: var(--orange); }
   .cards { grid-template-columns: 1fr; }
   .hero { padding: 45px 18px; }
 }
+
+.recruiter-faq {
+  background: #ffffff;
+  color: #111111;
+  padding: 28px;
+  border-radius: 12px;
+  margin: 30px 0;
+  border-top: 5px solid #f58220;
+  box-shadow: 0 3px 14px #00000010;
+}
+
+.recruiter-faq h2 {
+  margin-top: 0;
+  font-size: 28px;
+  color: #111111;
+}
+
+.recruiter-faq-intro {
+  color: #555555;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.recruiter-faq-item {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  margin: 12px 0;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.recruiter-faq-item summary {
+  padding: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #111111;
+  list-style-position: inside;
+}
+
+.recruiter-faq-item summary:hover {
+  background: #fff3e8;
+  color: #a84e00;
+}
+
+.recruiter-faq-item[open] summary {
+  background: #fff0e2;
+  border-bottom: 2px solid #f58220;
+}
+
+.recruiter-faq-item p {
+  padding: 0 16px;
+  margin: 14px 0;
+  color: #444444;
+  line-height: 1.7;
+}
+
+.recruiter-faq-button {
+  display: inline-block;
+  background: #f58220;
+  color: #111111;
+  padding: 13px 18px;
+  margin: 4px 16px 18px;
+  border-radius: 7px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.recruiter-faq-button:hover {
+  background: #e57212;
+}
+
+@media (max-width: 600px) {
+  .recruiter-faq {
+    padding: 18px;
+  }
+
+  .recruiter-faq h2 {
+    font-size: 24px;
+  }
+
+  .recruiter-faq-item summary {
+    padding: 14px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -187,6 +273,67 @@ footer a { color: var(--orange); }
     <a class="btn" href="https://www.raider-recruiting.com/magic-authentication?magic-token=726e15f5db494f9f8c7b9678f908a83c">Apply to Become a Recruiter</a>
     <p class="note" style="color:#dddddd;">This is a commission-based 1099 independent-contractor opportunity. Earnings are not guaranteed and depend on qualifying placements and applicable commission terms.</p>
   </section>
+
+<section class="recruiter-faq">
+  <h2>Recruiter Frequently Asked Questions</h2>
+  <p class="recruiter-faq-intro">
+    Interested in becoming a truck driver recruiter? Here are answers to common questions about working with Foxx Enterprise.
+  </p>
+
+  <details class="recruiter-faq-item">
+    <summary>Do I need recruiting experience?</summary>
+    <p>Previous recruiting experience can be helpful, but being organized, communicating well, and being willing to learn are important.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>How does the commission pay work?</summary>
+    <p>This is a 1099 commission-based opportunity. Commissions may range from $300 to $2,500 per hired driver, depending on the applicable placement and agreement. Confirm the current commission terms before starting.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>Do I have to make cold calls?</summary>
+    <p>Leads are provided from drivers who have already applied, so cold calling is not required as part of the described process.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>What equipment do I need?</summary>
+    <p>You need a phone to communicate with drivers and a computer to manage leads, applications, and recruiting tasks.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>Can I work from home?</summary>
+    <p>Yes. This opportunity is designed for remote work, allowing flexibility in how you organize your schedule while handling your recruiting responsibilities.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>What will I do as a recruiter?</summary>
+    <p>You may contact drivers who have applied, pre-qualify candidates, help drivers complete applications, coordinate orientations, and communicate with carrier hiring teams.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>When do I get paid?</summary>
+    <p>Payment timing and commission eligibility depend on your recruiter agreement. Confirm the payment schedule and placement requirements with the team.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>Is this a 1099 position?</summary>
+    <p>Yes, the opportunity is described as an independent contractor position. Review the agreement and tax responsibilities before accepting.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>Is training available?</summary>
+    <p>Training and ongoing support are available to help you learn the recruiting process and manage applicants.</p>
+  </details>
+
+  <details class="recruiter-faq-item">
+    <summary>How do I apply?</summary>
+    <p>Complete the recruiter application form to provide your information and get started.</p>
+    <a class="recruiter-faq-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeA6085cQEyh5dLSmWdVWl0i4_POwbK4G0ZBXu6nLvxB42zhQ/viewform?usp=header">
+      Apply to Become a Recruiter
+    </a>
+  </details>
+</section>
+
 </main>
 
 <footer>
