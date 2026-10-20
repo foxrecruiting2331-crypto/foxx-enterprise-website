@@ -183,7 +183,73 @@ input, select {
   }
 }
 
-.notice {
+
+.faq-section {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 12px;
+  margin: 30px 0;
+  box-shadow: 0 3px 14px #00000010;
+  border-top: 5px solid var(--orange);
+}
+
+.faq-section h2 {
+  margin-top: 0;
+  color: var(--black);
+  font-size: 28px;
+}
+
+.faq-intro {
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.faq-item {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  margin: 12px 0;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.faq-item summary {
+  padding: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1.5;
+  color: var(--black);
+  list-style-position: inside;
+}
+
+.faq-item summary:hover {
+  background: #fff3e8;
+  color: #a84e00;
+}
+
+.faq-item[open] summary {
+  background: #fff0e2;
+  border-bottom: 2px solid var(--orange);
+}
+
+.faq-item p {
+  padding: 0 16px 16px;
+  margin: 14px 0 0;
+  color: #444444;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .faq-section {
+    padding: 18px;
+  }
+
+  .faq-section h2 {
+    font-size: 24px;
+  }
+}
+
+  .notice {
   background: white;
   padding: 22px;
   border-radius: 10px;
@@ -342,6 +408,52 @@ footer a { color: var(--orange); }
   </div>
 
   <section id="jobs" aria-live="polite"></section>
+
+
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <p class="faq-intro">Have questions about finding your next driving job? We’re here to help!</p>
+
+  <details class="faq-item">
+    <summary>How do I apply for a truck driving job?</summary>
+    <p>Browse our available positions and click Apply Now. You can also get matched with a recruiter who can help you explore your options.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>How much CDL experience do I need?</summary>
+    <p>Requirements vary by position. Some jobs require 3 months of experience, while others require 6 months, 1 year, or more. Check each listing for details.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>What types of trucking jobs are available?</summary>
+    <p>Available opportunities may include local, dedicated, regional, intermodal, and over-the-road positions.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I find a job that gets me home daily?</summary>
+    <p>Yes! Use the Home Time filter to look for home-daily, home-weekly, and home-weekends opportunities.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>How much can I earn?</summary>
+    <p>Pay varies by carrier, route, experience, and pay structure. Review each listing and confirm current pay details with your recruiter.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Do you have no-touch freight jobs?</summary>
+    <p>Yes, no-touch freight opportunities may be available. Use the Freight Type filter to narrow your search.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>What if there are no jobs near me?</summary>
+    <p>Try searching by job title or location, or contact us to get matched with a recruiter who can help you explore available positions.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I speak with a recruiter?</summary>
+    <p>Click the Get Matched With a Recruiter button and submit the form so our team can help you find a suitable opportunity.</p>
+  </details>
+</section>
 
   <section class="notice">
     <h2>Not Sure Which Job Fits You?</h2>
