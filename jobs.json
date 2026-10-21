@@ -479,7 +479,7 @@
 
 {
   "id": "anheuser-busch-dedicated-truck-driver-20261020",
-  "title": "Anheuser Busch Dedicated Truck Driver",
+  "title": "Regional Dedicated Truck Driver",
   "location": "48 Lower States",
   "state": "Multiple States",
   "pay": "$1,519 Average Weekly | $1,870 Top Weekly",
@@ -495,7 +495,7 @@
     "Status: Active",
     "Openings: 50",
     "OVERVIEW",
-    "Anheuser Busch - East account with current operations within all regions of the United States.",
+    "East account with current operations within all regions of the United States.",
     "OPERATIONS",
     "Drivers on this fleet operate condo trucks and dry van trailers.",
     "RESPONSIBILITIES",
@@ -519,6 +519,49 @@
     "All trucks have automatic transmissions."
   ],
   "apply": ""
+},
+  ```json
+{
+  "id": "anheuser-busch-condo-regional-20261020",
+  "title": "Regional",
+  "location": "48 Lower States",
+  "state": "Multiple States",
+  "pay": "$1,519 Average Weekly | $1,870 Top Weekly",
+  "home": "Home Every 2 Weeks",
+  "freight": "No-Touch Freight | Dry Van | Some Drop & Hook",
+  "experience": "3 Months",
+  "details": [
+    "HIRING AREA",
+    "AL, AR, AZ, CO, CT, DE, FL, GA, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MN, MO, MS, MT, NC, ND, NE, NH, NJ, NM, NV, NY, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VA, VT, WA, WI, WV, WY",
+    "JOB INFORMATION",
+    "Driver Type: Solo",
+    "Experience Requirement: 3 months",
+    "Status: Active",
+    "Openings: 10",
+    "OVERVIEW",
+    "Dry van operation within the 48 states.",
+    "OPERATIONS",
+    "Drivers operate condo trucks and dry van trailers delivering no-touch freight.",
+    "LOAD TYPE",
+    "Some locations offer drop-and-hook, while others involve live unloading or possibly live reloading.",
+    "MILEAGE",
+    "Estimated mileage: 2,500 miles per week.",
+    "DEMAND",
+    "Mileage and workload vary based on customer demand.",
+    "REQUIREMENTS",
+    "Drivers must be proficient in on-time performance and communication.",
+    "DELIVERY LOCATIONS",
+    "The account covers the lower 48 states, with regular deliveries to WA, OR, CA, NV, AZ, WY, CO, NM, ME, KS, OK, TX, IA, MO, AR, LA, MS, TN, KY, IL, IN, AL, GA, FL, VA, and OH.",
+    "SCHEDULE",
+    "Drivers are out for two weeks and home for two days.",
+    "PAY SCALE",
+    "Average Weekly Pay: $1,519",
+    "Average Annualized Pay: $78,988",
+    "Top Weekly Pay: $1,870",
+    "Top Annualized Pay: $97,240"
+  ],
+  "apply": ""
 }
 ]
+
 
