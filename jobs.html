@@ -753,6 +753,7 @@ const summary = detailLines
 });
 
   } catch (error) {
+   console.error("Foxx Enterprise loadJobs error:", error);
     count.textContent = "Jobs could not be loaded.";
     container.innerHTML = `
       <p>We couldn't load the job list right now. Please try again shortly, or contact a recruiter.</p>
