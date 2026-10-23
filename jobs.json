@@ -866,11 +866,7 @@
   "pay": "$23–$27.50 Per Hour | $1,300–$1,400 Average Weekly",
   "home": "Home Daily | Monday–Friday",
   "freight": "No-Touch Freight | Drop & Hook",
-  "DRIVER REQUIREMENTS",
-"12 months of driving experience within the past 3 years",
-"Must pass urine drug testing",
-"Must have a valid Class A CDL",
-"No SAP"
+ "experience": "12 Months of CDL-A Experience Within the Past 3 Years",
   "details": [
     "HIRING AREA",
     "Must live within a 40-minute commute of Napoleon, Ohio",
@@ -894,7 +890,12 @@
     "No-touch dedicated freight",
     "Drop-and-hook operations",
     "Modern equipment",
-    "Reliable, consistent local routes"
+    "Reliable, consistent local routes",
+    "DRIVER REQUIREMENTS",
+"12 months of driving experience within the past 3 years",
+"Must pass urine drug testing",
+"Must have a valid Class A CDL",
+"No SAP"
   ],
   "apply": ""
 },
