@@ -413,10 +413,16 @@ fetch('/reviews.json')
 <section class="meet-ceo" id="meet-ceo">
   <div class="ceo-container">
 
-    <div class="ceo-image">
-      <img src="allison-fox-ceo.png"
-           alt="Allison Fox, CEO of Foxx Enterprise">
-    </div>
+
+<div class="ceo-image">
+  <img src="allison-fox-ceo.png"
+       alt="Allison Fox, CEO of Foxx Enterprise">
+
+  <a href="/jobs.html" class="btn ceo-jobs-btn">
+    FIND YOUR NEXT SEAT
+  </a>
+</div>
+
 
     <div class="ceo-content">
       <h2>Welcome to Foxx Enterprise</h2>
@@ -541,7 +547,26 @@ fetch('/reviews.json')
   .ceo-content h2 {
     font-size: 30px;
   }
+
+.ceo-jobs-btn {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  background: #ff790e;
+  color: #fff !important;
+  padding: 16px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: 0.3s;
 }
+
+.ceo-jobs-btn:hover {
+  background: #e56800;
+  transform: translateY(-2px);
+}
+
 </style>
 
 </body>
