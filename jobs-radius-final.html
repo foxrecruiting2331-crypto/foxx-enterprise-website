@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head> <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMJVSCVXYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMJVSCVXYP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truck Driver Jobs | Foxx Enterprise</title>
+<style>
+:root {
+  --orange: #f58220;
+  --black: #111111;
+  --white: #ffffff;
+  --gray: #f4f4f4;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--gray);
+  color: var(--black);
+}
+header {
+  background: var(--black);
+  color: white;
+  padding: 18px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--orange);
+}
+.logo { width: 210px; max-width: 65%; height: auto; }
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 8px;
+  font-weight: bold;
+}
+nav a:hover { color: var(--orange); }
+.hero {
+  background: linear-gradient(120deg, #111, #292929);
+  color: white;
+  text-align: center;
+  padding: 55px 20px;
+}
+.hero h1 { font-size: clamp(30px, 5vw, 46px); margin: 0 0 14px; }
+.hero h1 span { color: var(--orange); }
+.hero p { font-size: 18px; line-height: 1.6; }
+.button {
+  display: inline-block;
+  background: var(--orange);
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 13px 18px;
+  border-radius: 7px;
+  border: 0;
+  cursor: pointer;
+}
+.button.dark { background: #111; color: white; }
+main { max-width: 1150px; margin: auto; padding: 30px 20px 55px; }
+.search-panel {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 3px 14px #00000012;
+  margin-top: -5px;
+}
+.search-panel h2 { margin-top: 0; }
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+input, select {
+  width: 100%;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 15px;
+  color: #111111;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  min-height: 50px;
+  appearance: auto;
+}
+
+.section-title { margin: 35px 0 18px; }
+#jobCount { color: #555; }
+#jobs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 20px;
+}
+
+.job-card {
+  background: var(--white);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+ border-left: 5px solid var(--orange);
+border-top: none;
+  box-shadow: 0 4px 15px #0000000d;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Make job titles stand out */
+.job-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111111;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Make job pay easier to spot */
+.job-card .job-pay {
+  display: inline-block;
+  color: #b45309;
+  background: #fff0e2;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 17px;
+  margin: 4px 0 10px;
+}
+
+/* Improve readability of job details */
+.job-card p {
+  line-height: 1.65;
+}
+
+.job-card:hover {
+  box-shadow: 0 7px 22px #00000016;
+  transform: translateY(-2px);
+}
+
+.job-card h3 {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--orange);
+}
+
+.job-card p {
+  line-height: 1.6;
+  margin: 0;
+  color: #444;
+}
+
+.job-pay {
+  font-size: 19px;
+  font-weight: bold;
+  color: var(--black);
+}
+
+.job-summary {
+  font-size: 14px;
+}
+
+.job-details {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 14px;
+  margin-top: 2px;
+}
+
+.job-details ul {
+  padding-left: 20px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.job-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.job-actions .button {
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.details-button {
+  background: var(--black);
+  color: white;
+}
+
+.details-button:hover {
+  background: #333;
+}
+
+@media (max-width: 600px) {
+  #jobs {
+    grid-template-columns: 1fr;
+  }
+
+  .job-card {
+    padding: 18px;
+  }
+
+  .job-actions {
+    flex-direction: column;
+  }
+
+  .job-actions .button {
+    width: 100%;
+  }
+}
+
+
+.faq-section {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 12px;
+  margin: 30px 0;
+  box-shadow: 0 3px 14px #00000010;
+  border-top: 5px solid var(--orange);
+}
+
+.faq-section h2 {
+  margin-top: 0;
+  color: var(--black);
+  font-size: 28px;
+}
+
+.faq-intro {
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.faq-item {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  margin: 12px 0;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.faq-item summary {
+  padding: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1.5;
+  color: var(--black);
+  list-style-position: inside;
+}
+
+.faq-item summary:hover {
+  background: #fff3e8;
+  color: #a84e00;
+}
+
+.faq-item[open] summary {
+  background: #fff0e2;
+  border-bottom: 2px solid var(--orange);
+}
+
+.faq-item p {
+  padding: 0 16px 16px;
+  margin: 14px 0 0;
+  color: #444444;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .faq-section {
+    padding: 18px;
+  }
+
+  .faq-section h2 {
+    font-size: 24px;
+  }
+}
+
+  .notice {
+  background: white;
+  padding: 22px;
+  border-radius: 10px;
+  margin-top: 28px;
+  line-height: 1.6;
+}
+footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 28px 20px;
+  border-top: 4px solid var(--orange);
+  line-height: 1.7;
+}
+footer a { color: var(--orange); }
+@media (max-width: 600px) {
+  header { justify-content: center; text-align: center; }
+  nav { width: 100%; text-align: center; }
+  .hero { padding: 40px 18px; }
+}
+
+/* Job detail tags */
+.job-card .tag {
+  display: inline-block;
+  background: #fff0e2;
+  color: #9a4500;
+  padding: 6px 10px;
+  margin: 4px 6px 4px 0;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+/* Improve job summary readability */
+.job-card .job-summary {
+  color: #444444;
+  line-height: 1.7;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+
+/* Space out job information */
+.job-card p {
+  margin-top: 10px;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+  
+</style>
+</head>
+<body>
+  <div style="background:#111111;padding:15px 5%;display:flex;gap:12px;flex-wrap:wrap;">
+  <a href="https://www.foxxenterprisellc.com/" style="background:#f58220;color:#111111;padding:12px 18px;border-radius:7px;text-decoration:none;font-weight:bold;">🏠 Back to Home</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrxEsSTvTCYugn6Xaz2lUodnY4Lu8VHOrTgKqOtbpOBXhksg/viewform?usp=dialo" style="background:#f58220;color:#111111;padding:12px 18px;border-radius:7px;text-decoration:none;font-weight:bold;">🤝 Get Matched With a Recruiter</a>
+</div>
+
+<header>
+  <a href="index.html">
+    <img class="logo" src="foxx-enterprise-logo.png"
+      alt="Foxx Enterprise Truck Driver Recruiting">
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="jobs.html">Find Jobs</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrxEsSTvTCYugn6Xaz2lUodnY4Lu8VHOrTgKqOtbpOBXhksg/viewform?usp=dialo">Get Matched</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Find Your <span>Next Seat</span></h1>
+  <p>Explore trucking opportunities that fit your experience, pay goals, and home-time needs.</p>
+  <a class="button" href="#job-search">Explore Open Positions</a>
+</section>
+
+<main>
+  <section class="search-panel" id="job-search">
+    <h2>Find the Right Trucking Job</h2>
+    <p>Search available opportunities by job title, location, or home time.</p>
+    <div class="filters">
+      
+<input id="search" type="search" placeholder="Job title or keyword">
+
+<input id="zipCode" type="text" inputmode="numeric" maxlength="5" placeholder="Your 5-digit ZIP code">
+<select id="radius"><option value="10">Within 10 miles</option><option value="25">Within 25 miles</option><option value="50" selected>Within 50 miles</option><option value="75">Within 75 miles</option><option value="100">Within 100 miles</option><option value="250">Within 250 miles</option></select>
+
+<select id="state">
+  <option value="">All States</option>
+  <option value="Alabama">Alabama</option>
+  <option value="Alaska">Alaska</option>
+  <option value="Arizona">Arizona</option>
+  <option value="Arkansas">Arkansas</option>
+  <option value="California">California</option>
+  <option value="Colorado">Colorado</option>
+  <option value="Connecticut">Connecticut</option>
+  <option value="Delaware">Delaware</option>
+  <option value="Florida">Florida</option>
+  <option value="Georgia">Georgia</option>
+  <option value="Hawaii">Hawaii</option>
+  <option value="Idaho">Idaho</option>
+  <option value="Illinois">Illinois</option>
+  <option value="Indiana">Indiana</option>
+  <option value="Iowa">Iowa</option>
+  <option value="Kansas">Kansas</option>
+  <option value="Kentucky">Kentucky</option>
+  <option value="Louisiana">Louisiana</option>
+  <option value="Maine">Maine</option>
+  <option value="Maryland">Maryland</option>
+  <option value="Massachusetts">Massachusetts</option>
+  <option value="Michigan">Michigan</option>
+  <option value="Minnesota">Minnesota</option>
+  <option value="Mississippi">Mississippi</option>
+  <option value="Missouri">Missouri</option>
+  <option value="Montana">Montana</option>
+  <option value="Nebraska">Nebraska</option>
+  <option value="Nevada">Nevada</option>
+  <option value="New Hampshire">New Hampshire</option>
+  <option value="New Jersey">New Jersey</option>
+  <option value="New Mexico">New Mexico</option>
+  <option value="New York">New York</option>
+  <option value="North Carolina">North Carolina</option>
+  <option value="North Dakota">North Dakota</option>
+  <option value="Ohio">Ohio</option>
+  <option value="Oklahoma">Oklahoma</option>
+  <option value="Oregon">Oregon</option>
+  <option value="Pennsylvania">Pennsylvania</option>
+  <option value="Rhode Island">Rhode Island</option>
+  <option value="South Carolina">South Carolina</option>
+  <option value="South Dakota">South Dakota</option>
+  <option value="Tennessee">Tennessee</option>
+  <option value="Texas">Texas</option>
+  <option value="Utah">Utah</option>
+  <option value="Vermont">Vermont</option>
+  <option value="Virginia">Virginia</option>
+  <option value="Washington">Washington</option>
+  <option value="West Virginia">West Virginia</option>
+  <option value="Wisconsin">Wisconsin</option>
+  <option value="Wyoming">Wyoming</option>
+  <option value="District of Columbia">District of Columbia</option>
+</select>
+
+<select id="experience">
+  <option value="">Any Experience</option>
+  <option value="3">3+ months</option>
+  <option value="6">6+ months</option>
+  <option value="12">1+ year</option>
+  <option value="24">2+ years</option>
+</select>
+
+<select id="runType">
+  <option value="">Any Type of Run</option>
+  <option value="local">Local</option>
+  <option value="regional">Regional</option>
+  <option value="dedicated">Dedicated</option>
+  <option value="otr">Over the Road (OTR)</option>
+</select>
+
+<select id="touchFreight">
+  <option value="">Any Freight Type</option>
+  <option value="no-touch">No-Touch Freight</option>
+  <option value="touch">Touch Freight</option>
+</select>
+
+<select id="homeTime">
+  <option value="">Any Home Time</option>
+  <option value="daily">Home Daily</option>
+  <option value="weekly">Home Weekly</option>
+  <option value="weekends">Home Weekends</option>
+</select>
+
+    </div>
+  </section>
+
+  <div class="section-title">
+    <h2>Current Trucking Opportunities</h2>
+    <p id="jobCount">Loading available jobs...</p>
+  </div>
+
+  <section id="jobs" aria-live="polite"></section>
+
+
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <p class="faq-intro">Have questions about finding your next driving job? We’re here to help!</p>
+
+  <details class="faq-item">
+    <summary>How do I apply for a truck driving job?</summary>
+    <p>Browse our available positions and click Apply Now. You can also get matched with a recruiter who can help you explore your options.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>How much CDL experience do I need?</summary>
+    <p>Requirements vary by position. Some jobs require 3 months of experience, while others require 6 months, 1 year, or more. Check each listing for details.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>What types of trucking jobs are available?</summary>
+    <p>Available opportunities may include local, dedicated, regional, intermodal, and over-the-road positions.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I find a job that gets me home daily?</summary>
+    <p>Yes! Use the Home Time filter to look for home-daily, home-weekly, and home-weekends opportunities.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>How much can I earn?</summary>
+    <p>Pay varies by carrier, route, experience, and pay structure. Review each listing and confirm current pay details with your recruiter.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Do you have no-touch freight jobs?</summary>
+    <p>Yes, no-touch freight opportunities may be available. Use the Freight Type filter to narrow your search.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>What if there are no jobs near me?</summary>
+    <p>Try searching by job title or location, or contact us to get matched with a recruiter who can help you explore available positions.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I speak with a recruiter?</summary>
+    <p>Click the Get Matched With a Recruiter button and submit the form so our team can help you find a suitable opportunity.</p>
+  </details>
+</section>
+
+  <section class="notice">
+    <h2>Not Sure Which Job Fits You?</h2>
+    <p>We work with over 50 carriers and want to help you find a seat that fits your life. Tell us what you are looking for, and our team can help you explore your options.</p>
+    <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdrxEsSTvTCYugn6Xaz2lUodnY4Lu8VHOrTgKqOtbpOBXhksg/viewform?usp=dialo">Get Matched With a Recruiter</a>
+  </section>
+  <p style="font-size:13px;color:#666;margin-top:18px;">Job information should be verified with a recruiter before applying. Pay, routes, qualifications and availability can change.</p>
+</main>
+
+<footer>
+  <strong>FOXX ENTERPRISE</strong><br>
+  We Care About You, Not Just the Numbers.<br>
+  Helping Truck Drivers Find a Seat That Fits Their Life.<br>
+  <a href="index.html">Back to Homepage</a>
+</footer>
+
+<script>
+const APPLICATION_URL = "https://intelliapp.driverapponline.com/c/foxxenterprisellc?r=Allison.Fox";
+const QUESTION_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSdHI6WBei7q7jTDMzurQz6Y12CpVMc8G_2RGE0Tal3ax5jqIQ/viewform?usp=publish-editor";
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[c]);
+}
+function textOf(value) {
+  if (Array.isArray(value)) return value.map(textOf).join(" ");
+  if (value && typeof value === "object") return Object.values(value).map(textOf).join(" ");
+  return String(value ?? "");
+}
+function norm(value) {
+  return textOf(value).toLowerCase().replace(/[\u2010-\u2015]/g, "-").replace(/\s+/g, " ").trim();
+}
+function homeCategory(job) {
+  const t = norm([job.title, job.home, job.homeTime, job.description, job.details, job.requirements]);
+  if (/\bhome[- ]daily\b/.test(t)) return "daily";
+  if (/\bhome[- ]weekly\b/.test(t)) return "weekly";
+  if (/\bhome[- ]weekends?\b|\bweekends? home\b/.test(t)) return "weekends";
+  return "";
+}
+function minimumExperienceMonths(value) {
+  const t = norm(value);
+  const range = t.match(/(\d+)\s*(?:-|to)\s*(\d+)\s*months?/);
+  if (range) return Number(range[1]);
+  const years = t.match(/(\d+(?:\.\d+)?)\s*years?/);
+  const months = t.match(/(\d+(?:\.\d+)?)\s*months?/);
+  if (years) return Number(years[1]) * 12;
+  if (months) return Number(months[1]);
+  if (/\bno experience\b|\btraining provided\b/.test(t)) return 0;
+  return null;
+}
+function runCategory(job) {
+  const explicit = norm(job.runType);
+  if (explicit) return explicit;
+  const t = norm([job.title, job.location, job.description, job.details, job.requirements]);
+  if (/\blocal\b|\bhome[- ]daily\b/.test(t)) return "local";
+  if (/\bdedicated\b/.test(t)) return "dedicated";
+  if (/\bregional\b/.test(t)) return "regional";
+  if (/\botr\b|over[- ]the[- ]road/.test(t)) return "otr";
+  return "";
+}
+function freightCategory(job) {
+  const t = norm([job.freight, job.description, job.details, job.requirements, job.title]);
+  if (/\bno[- ]touch\b/.test(t)) return "no-touch";
+  if (/\btouch freight\b|\bdriver unload\b|\bunload\b|\bpallet jack\b/.test(t)) return "touch";
+  return "";
+}
+
+const zipCoordinateCache = new Map();
+async function getZipCoordinates(zip) {
+  if (zipCoordinateCache.has(zip)) return zipCoordinateCache.get(zip);
+  const pending = fetch("https://api.zippopotam.us/us/" + encodeURIComponent(zip))
+    .then(r => { if (!r.ok) throw new Error("ZIP not found"); return r.json(); })
+    .then(data => {
+      const place = data.places && data.places[0];
+      if (!place) throw new Error("No ZIP location");
+      return {lat:Number(place.latitude), lon:Number(place.longitude), state:String(place["state abbreviation"] || "").toUpperCase()};
+    });
+  zipCoordinateCache.set(zip, pending);
+  try { return await pending; } catch(e) { zipCoordinateCache.delete(zip); throw e; }
+}
+function milesBetween(a,b) {
+  const rad=x=>x*Math.PI/180, dLat=rad(b.lat-a.lat), dLon=rad(b.lon-a.lon);
+  const h=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;
+  return 3958.8*2*Math.asin(Math.sqrt(h));
+}
+
+async function loadJobs() {
+  const container = document.getElementById("jobs");
+  const count = document.getElementById("jobCount");
+  container.innerHTML = "";
+  count.textContent = "Loading available jobs...";
+  try {
+    const response = await fetch("jobs.json", {cache:"no-store"});
+    if (!response.ok) throw new Error("Could not load jobs.json: " + response.status);
+    const data = await response.json();
+    const jobs = Array.isArray(data) ? data : (Array.isArray(data.jobs) ? data.jobs : []);
+    const query = norm(document.getElementById("search").value);
+    const zip = document.getElementById("zipCode").value.replace(/\D/g, "").slice(0, 5);
+    const radius = Number(document.getElementById("radius").value || 50);
+    let driverCoordinates = null;
+    if (zip.length === 5) {
+      try { driverCoordinates = await getZipCoordinates(zip); }
+      catch (error) {
+        count.textContent = "Please enter a valid 5-digit ZIP code.";
+        container.innerHTML = "<p>We couldn't find that ZIP code. Please check it and try again.</p>";
+        return;
+      }
+    }
+    const state = norm(document.getElementById("state").value);
+    const experience = Number(document.getElementById("experience").value || 0);
+    const runType = norm(document.getElementById("runType").value);
+    const freight = document.getElementById("touchFreight").value;
+    const home = document.getElementById("homeTime").value;
+
+    const filtered = (await Promise.all(jobs.map(async job => {
+      if (job.active === false || ["paused", "inactive"].includes(norm(job.status))) return false;
+      const searchable = norm([
+        job.title, job.location, job.pay, job.home, job.homeTime, job.freight,
+        job.description, job.details, job.requirements, job.state, job.zipCode,
+        job.zipCodes, job.experience, job.runType
+      ]);
+      if (query && !searchable.includes(query)) return false;
+      if (state && norm(job.state) !== state) return false;
+
+      // Match the driver's ZIP against every ZIP assigned to the job.
+      // Multi-city jobs qualify if at least one listed location is within range.
+      if (driverCoordinates) {
+        const jobZips = [
+          ...(Array.isArray(job.zipCodes) ? job.zipCodes : []),
+          ...(job.zipCode ? [String(job.zipCode)] : []),
+          // Some existing listings store the ZIP directly in the location field.
+          ...(typeof job.location === "string" && /^\\d{5}$/.test(job.location.trim())
+            ? [job.location.trim()] : [])
+        ].filter((value, index, all) => all.indexOf(value) === index);
+        if (!jobZips.length) return false;
+        let withinRadius = false;
+        for (const value of jobZips) {
+          const jobZip = String(value).replace(/\D/g, "");
+          if (jobZip.length !== 5) continue;
+          try {
+            const coords = await getZipCoordinates(jobZip);
+            if (milesBetween(driverCoordinates, coords) <= radius) {
+              withinRadius = true;
+              break;
+            }
+          } catch (e) {
+            console.warn("Could not locate job ZIP:", jobZip, e);
+          }
+        }
+        if (!withinRadius) return false;
+      }
+      if (experience) {
+        const required = minimumExperienceMonths(job.experience);
+        if (required === null || required > experience) return false;
+      }
+      if (runType && runCategory(job) !== runType) return false;
+      if (freight && freightCategory(job) !== freight) return false;
+      if (home && homeCategory(job) !== home) return false;
+      return true;
+    }))).filter(Boolean);
+
+    count.textContent = filtered.length + " job(s) found" + (driverCoordinates ? " within " + radius + " miles of " + zip : "");
+    if (!filtered.length) {
+      container.innerHTML = "<p>No matching jobs found. Try changing your filters or get matched with a recruiter.</p>";
+      return;
+    }
+
+    filtered.forEach((job, index) => {
+      const card = document.createElement("article");
+      card.className = "job-card";
+      const title = escapeHTML(job.title || "Trucking Opportunity");
+      const pay = escapeHTML(job.pay || "Pay discussed with recruiter");
+      const location = escapeHTML(job.location || job.state || "Location varies");
+      const homeTime = escapeHTML(job.home || job.homeTime || "");
+      const freightText = escapeHTML(job.freight || "");
+      const experienceText = escapeHTML(job.experience || "");
+      const raw = [
+        job.description,
+        ...(Array.isArray(job.details) ? job.details : (job.details ? [job.details] : [])),
+        ...(Array.isArray(job.requirements) ? job.requirements : (job.requirements ? [job.requirements] : []))
+      ].filter(Boolean);
+      const lines = [...new Set(raw.map(x => textOf(x).trim()).filter(Boolean))];
+      const summary = lines
+        .filter(x => !/^(qualifications|requirements|pay|home time|freight):?/i.test(x.trim()))
+        .filter(x => !/^(home daily|home weekly|home weekends|no touch|no-touch freight|touch freight)$/i.test(x.trim()))
+        .slice(0, 2).map(x => escapeHTML(x.replace(/^\s*[-•]\s*/, ""))).join(" ");
+      const tags = [
+        location && `<span class="tag">${location}</span>`,
+        homeTime && `<span class="tag">${homeTime}</span>`,
+        freightText && `<span class="tag">${freightText}</span>`,
+        experienceText && `<span class="tag">${experienceText}</span>`
+      ].filter(Boolean).join("");
+      const fullDetails = lines.length
+        ? `<ul>${lines.map(x => `<li>${escapeHTML(x.replace(/^\s*[-•]\s*/, ""))}</li>`).join("")}</ul>`
+        : "<p>Please contact a recruiter for full job requirements.</p>";
+      const detailsId = "job-details-" + String(job.id || index).replace(/[^a-zA-Z0-9_-]/g, "");
+      const applyUrl = typeof job.apply === "string" && /^https:\/\/[^\s"'<>]+$/i.test(job.apply)
+        ? job.apply : APPLICATION_URL;
+
+      card.innerHTML = `
+        <h3>${title}</h3><div>${tags}</div>
+        <p class="job-pay">${pay}</p>
+        <p class="job-summary">${summary || "Explore this trucking opportunity and see if it fits your needs."}</p>
+        <div class="job-actions"><button class="button details-button" type="button" aria-expanded="false" aria-controls="${detailsId}">View Details</button></div>
+        <div class="job-details" id="${detailsId}" hidden>
+          <h4>Full Job Details</h4>${fullDetails}
+          <div class="job-actions">
+            <a class="button" href="${escapeHTML(applyUrl)}" target="_blank" rel="noopener noreferrer">Apply Now</a>
+            <a class="button dark" href="${QUESTION_FORM}" target="_blank" rel="noopener noreferrer">Ask a Question</a>
+          </div>
+        </div>`;
+      const btn = card.querySelector(".details-button");
+      const panel = card.querySelector(".job-details");
+      btn.addEventListener("click", () => {
+        const open = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!open));
+        btn.textContent = open ? "View Details" : "Hide Details";
+        panel.hidden = open;
+      });
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Foxx Enterprise loadJobs error:", error);
+    count.textContent = "Jobs could not be loaded.";
+    container.innerHTML = `<p>We couldn't load the job list right now. Please try again shortly, or contact a recruiter.</p><a class="button" href="${APPLICATION_URL}">Apply Now</a>`;
+  }
+}
+document.getElementById("search").addEventListener("input", loadJobs);
+document.getElementById("zipCode").addEventListener("input", loadJobs);
+["radius", "state", "experience", "runType", "touchFreight", "homeTime"].forEach(id =>
+  document.getElementById(id).addEventListener("change", loadJobs)
+);
+loadJobs();
+</script>
+</body>
+</html>
