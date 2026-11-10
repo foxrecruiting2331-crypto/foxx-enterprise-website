@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head> <!-- Google tag (gtag.js) -->
@@ -377,7 +376,8 @@ footer a { color: var(--orange); }
       
 <input id="search" type="search" placeholder="Job title or keyword">
 
-<input id="zipCode" type="text" inputmode="numeric" maxlength="5" placeholder="Job ZIP code (first 3 digits)">
+<input id="zipCode" type="text" inputmode="numeric" maxlength="5" placeholder="Your 5-digit ZIP code">
+<select id="radius"><option value="10">Within 10 miles</option><option value="25">Within 25 miles</option><option value="50" selected>Within 50 miles</option><option value="75">Within 75 miles</option><option value="100">Within 100 miles</option><option value="250">Within 250 miles</option></select>
 
 <select id="state">
   <option value="">All States</option>
@@ -585,6 +585,26 @@ function freightCategory(job) {
   if (/\btouch freight\b|\bdriver unload\b|\bunload\b|\bpallet jack\b/.test(t)) return "touch";
   return "";
 }
+
+const zipCoordinateCache = new Map();
+async function getZipCoordinates(zip) {
+  if (zipCoordinateCache.has(zip)) return zipCoordinateCache.get(zip);
+  const pending = fetch("https://api.zippopotam.us/us/" + encodeURIComponent(zip))
+    .then(r => { if (!r.ok) throw new Error("ZIP not found"); return r.json(); })
+    .then(data => {
+      const place = data.places && data.places[0];
+      if (!place) throw new Error("No ZIP location");
+      return {lat:Number(place.latitude), lon:Number(place.longitude), state:String(place["state abbreviation"] || "").toUpperCase()};
+    });
+  zipCoordinateCache.set(zip, pending);
+  try { return await pending; } catch(e) { zipCoordinateCache.delete(zip); throw e; }
+}
+function milesBetween(a,b) {
+  const rad=x=>x*Math.PI/180, dLat=rad(b.lat-a.lat), dLon=rad(b.lon-a.lon);
+  const h=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;
+  return 3958.8*2*Math.asin(Math.sqrt(h));
+}
+
 async function loadJobs() {
   const container = document.getElementById("jobs");
   const count = document.getElementById("jobCount");
@@ -597,24 +617,54 @@ async function loadJobs() {
     const jobs = Array.isArray(data) ? data : (Array.isArray(data.jobs) ? data.jobs : []);
     const query = norm(document.getElementById("search").value);
     const zip = document.getElementById("zipCode").value.replace(/\D/g, "").slice(0, 5);
+    const radius = Number(document.getElementById("radius").value || 50);
+    let driverCoordinates = null;
+    if (zip.length === 5) {
+      try { driverCoordinates = await getZipCoordinates(zip); }
+      catch (error) {
+        count.textContent = "Please enter a valid 5-digit ZIP code.";
+        container.innerHTML = "<p>We couldn't find that ZIP code. Please check it and try again.</p>";
+        return;
+      }
+    }
     const state = norm(document.getElementById("state").value);
     const experience = Number(document.getElementById("experience").value || 0);
     const runType = norm(document.getElementById("runType").value);
     const freight = document.getElementById("touchFreight").value;
     const home = document.getElementById("homeTime").value;
 
-    const filtered = jobs.filter(job => {
+    const filtered = (await Promise.all(jobs.map(async job => {
       if (job.active === false || ["paused", "inactive"].includes(norm(job.status))) return false;
       const searchable = norm([
         job.title, job.location, job.pay, job.home, job.homeTime, job.freight,
         job.description, job.details, job.requirements, job.state, job.zipCode,
-        job.experience, job.runType
+        job.zipCodes, job.experience, job.runType
       ]);
       if (query && !searchable.includes(query)) return false;
       if (state && norm(job.state) !== state) return false;
-      // ZIP filtering is a first-three-digit prefix match, not a mileage calculation.
-      const jobZip = String(job.zipCode || "").replace(/\D/g, "");
-      if (zip && (!jobZip || !jobZip.startsWith(zip.slice(0, Math.min(3, zip.length))))) return false;
+
+      // Match the driver's ZIP against every ZIP assigned to the job.
+      // Multi-city jobs qualify if at least one listed location is within range.
+      if (driverCoordinates) {
+        const jobZips = Array.isArray(job.zipCodes) ? job.zipCodes :
+          (job.zipCode ? [String(job.zipCode)] : []);
+        if (!jobZips.length) return false;
+        let withinRadius = false;
+        for (const value of jobZips) {
+          const jobZip = String(value).replace(/\D/g, "");
+          if (jobZip.length !== 5) continue;
+          try {
+            const coords = await getZipCoordinates(jobZip);
+            if (milesBetween(driverCoordinates, coords) <= radius) {
+              withinRadius = true;
+              break;
+            }
+          } catch (e) {
+            console.warn("Could not locate job ZIP:", jobZip, e);
+          }
+        }
+        if (!withinRadius) return false;
+      }
       if (experience) {
         const required = minimumExperienceMonths(job.experience);
         if (required === null || required > experience) return false;
@@ -623,9 +673,9 @@ async function loadJobs() {
       if (freight && freightCategory(job) !== freight) return false;
       if (home && homeCategory(job) !== home) return false;
       return true;
-    });
+    }))).filter(Boolean);
 
-    count.textContent = filtered.length + " job(s) found";
+    count.textContent = filtered.length + " job(s) found" + (driverCoordinates ? " within " + radius + " miles of " + zip : "");
     if (!filtered.length) {
       container.innerHTML = "<p>No matching jobs found. Try changing your filters or get matched with a recruiter.</p>";
       return;
@@ -693,11 +743,11 @@ async function loadJobs() {
 }
 document.getElementById("search").addEventListener("input", loadJobs);
 document.getElementById("zipCode").addEventListener("input", loadJobs);
-["state", "experience", "runType", "touchFreight", "homeTime"].forEach(id =>
+["radius", "state", "experience", "runType", "touchFreight", "homeTime"].forEach(id =>
   document.getElementById(id).addEventListener("change", loadJobs)
 );
 loadJobs();
 </script>
 </body>
 </html>
-
+   
