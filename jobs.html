@@ -672,7 +672,7 @@ async function loadJobs() {
       if (runType && runCategory(job) !== runType) return false;
       if (freight && freightCategory(job) !== freight) return false;
       if (home && homeCategory(job) !== home) return false;
-      return true;
+return job;
     }))).filter(Boolean);
 
     count.textContent = filtered.length + " job(s) found" + (driverCoordinates ? " within " + radius + " miles of " + zip : "");
