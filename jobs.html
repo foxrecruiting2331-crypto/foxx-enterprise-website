@@ -377,15 +377,7 @@ footer a { color: var(--orange); }
       
 <input id="search" type="search" placeholder="Job title or keyword">
 
-<input id="zipCode" type="text" placeholder="ZIP code">
-      <select id="radius">
-  <option value="10">Within 10 miles</option>
-  <option value="25">Within 25 miles</option>
-  <option value="50" selected>Within 50 miles</option>
-  <option value="75">Within 75 miles</option>
-  <option value="100">Within 100 miles</option>
-  <option value="250">Within 250 miles</option>
-</select>
+<input id="zipCode" type="text" inputmode="numeric" maxlength="5" placeholder="Job ZIP code (first 3 digits)">
 
 <select id="state">
   <option value="">All States</option>
@@ -471,7 +463,6 @@ footer a { color: var(--orange); }
   <option value="weekends">Home Weekends</option>
 </select>
 
-      <button class="button dark" onclick="loadJobs()">Refresh Jobs</button>
     </div>
   </section>
 
@@ -548,237 +539,165 @@ const APPLICATION_URL = "https://intelliapp.driverapponline.com/c/foxxenterprise
 const QUESTION_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSdHI6WBei7q7jTDMzurQz6Y12CpVMc8G_2RGE0Tal3ax5jqIQ/viewform?usp=publish-editor";
 
 function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;",
-    '"':"&quot;", "'":"&#39;"
-  })[char]);
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[c]);
 }
-
-
+function textOf(value) {
+  if (Array.isArray(value)) return value.map(textOf).join(" ");
+  if (value && typeof value === "object") return Object.values(value).map(textOf).join(" ");
+  return String(value ?? "");
+}
+function norm(value) {
+  return textOf(value).toLowerCase().replace(/[\u2010-\u2015]/g, "-").replace(/\s+/g, " ").trim();
+}
 function homeCategory(job) {
-  const text = [
-    job.title,
-    job.home,
-    job.homeTime,
-    job.description,
-    ...(Array.isArray(job.details) ? job.details : [])
-  ].filter(Boolean).join(" ").toLowerCase();
-
-  if (text.includes("home daily") || text.includes("home-daily")) {
-    return "daily";
-  }
-
-  if (text.includes("home weekly") || text.includes("home-weekly")) {
-    return "weekly";
-  }
-
-  if (text.includes("home weekends") || text.includes("home-weekends")) {
-    return "weekends";
-  }
-
+  const t = norm([job.title, job.home, job.homeTime, job.description, job.details, job.requirements]);
+  if (/\bhome[- ]daily\b/.test(t)) return "daily";
+  if (/\bhome[- ]weekly\b/.test(t)) return "weekly";
+  if (/\bhome[- ]weekends?\b|\bweekends? home\b/.test(t)) return "weekends";
   return "";
 }
-
-
-function getDetails(job) {
-  return [job.description, job.details, job.requirements]
-    .filter(Boolean).join(" ").toLowerCase();
+function minimumExperienceMonths(value) {
+  const t = norm(value);
+  const range = t.match(/(\d+)\s*(?:-|to)\s*(\d+)\s*months?/);
+  if (range) return Number(range[1]);
+  const years = t.match(/(\d+(?:\.\d+)?)\s*years?/);
+  const months = t.match(/(\d+(?:\.\d+)?)\s*months?/);
+  if (years) return Number(years[1]) * 12;
+  if (months) return Number(months[1]);
+  if (/\bno experience\b|\btraining provided\b/.test(t)) return 0;
+  return null;
 }
-
+function runCategory(job) {
+  const explicit = norm(job.runType);
+  if (explicit) return explicit;
+  const t = norm([job.title, job.location, job.description, job.details, job.requirements]);
+  if (/\blocal\b|\bhome[- ]daily\b/.test(t)) return "local";
+  if (/\bdedicated\b/.test(t)) return "dedicated";
+  if (/\bregional\b/.test(t)) return "regional";
+  if (/\botr\b|over[- ]the[- ]road/.test(t)) return "otr";
+  return "";
+}
+function freightCategory(job) {
+  const t = norm([job.freight, job.description, job.details, job.requirements, job.title]);
+  if (/\bno[- ]touch\b/.test(t)) return "no-touch";
+  if (/\btouch freight\b|\bdriver unload\b|\bunload\b|\bpallet jack\b/.test(t)) return "touch";
+  return "";
+}
 async function loadJobs() {
   const container = document.getElementById("jobs");
   const count = document.getElementById("jobCount");
   container.innerHTML = "";
   count.textContent = "Loading available jobs...";
-
   try {
-    const response = await fetch("jobs.json");
-    if (!response.ok) throw new Error("Could not load jobs.json");
+    const response = await fetch("jobs.json", {cache:"no-store"});
+    if (!response.ok) throw new Error("Could not load jobs.json: " + response.status);
     const data = await response.json();
-    const jobs = Array.isArray(data) ? data : (data.jobs || []);
-    
-   
-const query = document.getElementById("search").value.toLowerCase().trim();
-const zip = document.getElementById("zipCode").value.trim();
-const state = document.getElementById("state").value.toLowerCase();
-const experience = document.getElementById("experience").value;
-const runType = document.getElementById("runType").value.toLowerCase();
-const freight = document.getElementById("touchFreight").value;
-const home = document.getElementById("homeTime").value;
-const radius = Number(document.getElementById("radius").value);
+    const jobs = Array.isArray(data) ? data : (Array.isArray(data.jobs) ? data.jobs : []);
+    const query = norm(document.getElementById("search").value);
+    const zip = document.getElementById("zipCode").value.replace(/\D/g, "").slice(0, 5);
+    const state = norm(document.getElementById("state").value);
+    const experience = Number(document.getElementById("experience").value || 0);
+    const runType = norm(document.getElementById("runType").value);
+    const freight = document.getElementById("touchFreight").value;
+    const home = document.getElementById("homeTime").value;
 
-const filtered = jobs.filter(job => {
-  if (job.active === false || job.status === "paused") return false;
-
-  const searchable = [
-    job.title,
-    job.location,
-    job.pay,
-    job.home,
-    job.homeTime,
-    job.freight,
-    job.description,
-    job.details,
-    job.requirements,
-    job.state,
-    job.zipCode,
-    job.experience,
-    job.runType
-  ].flat(Infinity).filter(Boolean).join(" ").toLowerCase();
-
-  if (query && !searchable.includes(query)) return false;
-
-  const jobState = String(job.state || "").toLowerCase();
-  if (state && jobState !== state) return false;
-
-  const jobZip = String(job.zipCode || "");
-  if (zip && !jobZip.startsWith(zip)) return false;
-
-  if (experience) {
-    const experienceText = String(job.experience || "").toLowerCase();
-    const monthsMatch = experienceText.match(/(\d+)\s*months?/);
-    const yearsMatch = experienceText.match(/(\d+)\s*years?/);
-
-    let monthsRequired = monthsMatch ? Number(monthsMatch[1]) : 0;
-    if (yearsMatch) monthsRequired = Number(yearsMatch[1]) * 12;
-
-    if (!monthsMatch && !yearsMatch) {
-      if (!experienceText.includes(experience.toLowerCase())) return false;
-    } else if (monthsRequired < Number(experience)) {
-      return false;
-    }
-  }
-
-  if (runType && !String(job.runType || job.title || job.location || "").toLowerCase().includes(runType)) {
-    return false;
-  }
-
-  const freightText = String(job.freight || job.description || job.details || "").toLowerCase();
-
-  if (freight === "no-touch" && !freightText.includes("no touch")) return false;
-  if (freight === "touch" && !freightText.includes("touch freight")) return false;
-
-  if (home && homeCategory(job) !== home) return false;
-
-  return true;
-});
-
-
+    const filtered = jobs.filter(job => {
+      if (job.active === false || ["paused", "inactive"].includes(norm(job.status))) return false;
+      const searchable = norm([
+        job.title, job.location, job.pay, job.home, job.homeTime, job.freight,
+        job.description, job.details, job.requirements, job.state, job.zipCode,
+        job.experience, job.runType
+      ]);
+      if (query && !searchable.includes(query)) return false;
+      if (state && norm(job.state) !== state) return false;
+      // ZIP filtering is a first-three-digit prefix match, not a mileage calculation.
+      const jobZip = String(job.zipCode || "").replace(/\D/g, "");
+      if (zip && (!jobZip || !jobZip.startsWith(zip.slice(0, Math.min(3, zip.length))))) return false;
+      if (experience) {
+        const required = minimumExperienceMonths(job.experience);
+        if (required === null || required > experience) return false;
+      }
+      if (runType && runCategory(job) !== runType) return false;
+      if (freight && freightCategory(job) !== freight) return false;
+      if (home && homeCategory(job) !== home) return false;
+      return true;
+    });
 
     count.textContent = filtered.length + " job(s) found";
     if (!filtered.length) {
-      container.innerHTML = "<p>No matching jobs found. Try another search or get matched with a recruiter.</p>";
+      container.innerHTML = "<p>No matching jobs found. Try changing your filters or get matched with a recruiter.</p>";
       return;
     }
 
+    filtered.forEach((job, index) => {
+      const card = document.createElement("article");
+      card.className = "job-card";
+      const title = escapeHTML(job.title || "Trucking Opportunity");
+      const pay = escapeHTML(job.pay || "Pay discussed with recruiter");
+      const location = escapeHTML(job.location || job.state || "Location varies");
+      const homeTime = escapeHTML(job.home || job.homeTime || "");
+      const freightText = escapeHTML(job.freight || "");
+      const experienceText = escapeHTML(job.experience || "");
+      const raw = [
+        job.description,
+        ...(Array.isArray(job.details) ? job.details : (job.details ? [job.details] : [])),
+        ...(Array.isArray(job.requirements) ? job.requirements : (job.requirements ? [job.requirements] : []))
+      ].filter(Boolean);
+      const lines = [...new Set(raw.map(x => textOf(x).trim()).filter(Boolean))];
+      const summary = lines
+        .filter(x => !/^(qualifications|requirements|pay|home time|freight):?/i.test(x.trim()))
+        .filter(x => !/^(home daily|home weekly|home weekends|no touch|no-touch freight|touch freight)$/i.test(x.trim()))
+        .slice(0, 2).map(x => escapeHTML(x.replace(/^\s*[-•]\s*/, ""))).join(" ");
+      const tags = [
+        location && `<span class="tag">${location}</span>`,
+        homeTime && `<span class="tag">${homeTime}</span>`,
+        freightText && `<span class="tag">${freightText}</span>`,
+        experienceText && `<span class="tag">${experienceText}</span>`
+      ].filter(Boolean).join("");
+      const fullDetails = lines.length
+        ? `<ul>${lines.map(x => `<li>${escapeHTML(x.replace(/^\s*[-•]\s*/, ""))}</li>`).join("")}</ul>`
+        : "<p>Please contact a recruiter for full job requirements.</p>";
+      const detailsId = "job-details-" + String(job.id || index).replace(/[^a-zA-Z0-9_-]/g, "");
+      const applyUrl = typeof job.apply === "string" && /^https:\/\/[^\s"'<>]+$/i.test(job.apply)
+        ? job.apply : APPLICATION_URL;
 
-filtered.forEach(job => {
-  const card = document.createElement("article");
-  card.className = "job-card";
-
-  const title = escapeHTML(job.title || "Trucking Opportunity");
-  const pay = escapeHTML(job.pay || "Pay discussed with recruiter");
-  const location = escapeHTML(job.location || job.state || "Location varies");
-  const homeTime = escapeHTML(job.home || job.homeTime || "");
-  const freight = escapeHTML(job.freight || "");
-  const experience = escapeHTML(job.experience || "");
-
-  const rawDetails = [
-    job.description,
-    ...(Array.isArray(job.details) ? job.details : [job.details]),
-    ...(Array.isArray(job.requirements) ? job.requirements : [job.requirements])
-  ].filter(Boolean);
-
-  const detailLines = [...new Set(rawDetails)]
-    .map(item => String(item).trim())
-    .filter(Boolean);
-
-  
-const summary = detailLines
-  .filter(line =>
-    !/^(qualifications|requirements|pay|home time|freight):?/i.test(line.trim())
-  )
-  .filter(line =>
-    !/^(home daily|home weekly|home weekends|no touch|no-touch freight|touch freight)$/i.test(line.trim())
-  )
-  .slice(0, 2)
-  .map(line => escapeHTML(line.replace(/^\s*[-•]\s*/, "")))
-  .join(" ");
-
-
-  const tags = [
-    location ? `<span class="tag">${location}</span>` : "",
-    homeTime ? `<span class="tag">${homeTime}</span>` : "",
-    freight ? `<span class="tag">${freight}</span>` : "",
-    experience ? `<span class="tag">${experience}</span>` : ""
-  ].filter(Boolean).join("");
-
-  const fullDetails = detailLines.length
-    ? `<ul>${detailLines.map(line =>
-        `<li>${escapeHTML(line.replace(/^\s*[-•]\s*/, ""))}</li>`
-      ).join("")}</ul>`
-    : "<p>Please contact a recruiter for full job requirements.</p>";
-
-  const detailsId = "job-details-" +
-    String(job.id || Math.random().toString(36).slice(2)).replace(/[^a-zA-Z0-9_-]/g, "");
-
-  card.innerHTML = `
-    <h3>${title}</h3>
-    <div>${tags}</div>
-    <p class="job-pay">${pay}</p>
-    <p class="job-summary">${summary || "Explore this trucking opportunity and see if it fits your needs."}</p>
-
-    <div class="job-actions">
-      <button class="button details-button" type="button"
-        aria-expanded="false" aria-controls="${detailsId}">
-        View Details
-      </button>
-    </div>
-
-    <div class="job-details" id="${detailsId}" hidden>
-      <h4>Full Job Details</h4>
-      ${fullDetails}
-      <div class="job-actions">
-        <a class="button" href="${APPLICATION_URL}"
-          target="_blank" rel="noopener">Apply Now</a>
-        <a class="button dark" href="${QUESTION_FORM}"
-          target="_blank" rel="noopener">Ask a Question</a>
-      </div>
-    </div>
-  `;
-
-  const detailsButton = card.querySelector(".details-button");
-  const detailsPanel = card.querySelector(".job-details");
-
-  detailsButton.addEventListener("click", () => {
-    const isExpanded = detailsButton.getAttribute("aria-expanded") === "true";
-    detailsButton.setAttribute("aria-expanded", String(!isExpanded));
-    detailsButton.textContent = isExpanded ? "View Details" : "Hide Details";
-    detailsPanel.hidden = isExpanded;
-  });
-
-  container.appendChild(card);
-});
-
+      card.innerHTML = `
+        <h3>${title}</h3><div>${tags}</div>
+        <p class="job-pay">${pay}</p>
+        <p class="job-summary">${summary || "Explore this trucking opportunity and see if it fits your needs."}</p>
+        <div class="job-actions"><button class="button details-button" type="button" aria-expanded="false" aria-controls="${detailsId}">View Details</button></div>
+        <div class="job-details" id="${detailsId}" hidden>
+          <h4>Full Job Details</h4>${fullDetails}
+          <div class="job-actions">
+            <a class="button" href="${escapeHTML(applyUrl)}" target="_blank" rel="noopener noreferrer">Apply Now</a>
+            <a class="button dark" href="${QUESTION_FORM}" target="_blank" rel="noopener noreferrer">Ask a Question</a>
+          </div>
+        </div>`;
+      const btn = card.querySelector(".details-button");
+      const panel = card.querySelector(".job-details");
+      btn.addEventListener("click", () => {
+        const open = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!open));
+        btn.textContent = open ? "View Details" : "Hide Details";
+        panel.hidden = open;
+      });
+      container.appendChild(card);
+    });
   } catch (error) {
-   console.error("Foxx Enterprise loadJobs error:", error);
+    console.error("Foxx Enterprise loadJobs error:", error);
     count.textContent = "Jobs could not be loaded.";
-    container.innerHTML = `
-      <p>We couldn't load the job list right now. Please try again shortly, or contact a recruiter.</p>
-      <a class="button" href="${APPLICATION_URL}">Apply Now</a>`;
+    container.innerHTML = `<p>We couldn't load the job list right now. Please try again shortly, or contact a recruiter.</p><a class="button" href="${APPLICATION_URL}">Apply Now</a>`;
   }
 }
-
-
 document.getElementById("search").addEventListener("input", loadJobs);
 document.getElementById("zipCode").addEventListener("input", loadJobs);
-document.getElementById("state").addEventListener("change", loadJobs);
-document.getElementById("experience").addEventListener("change", loadJobs);
-document.getElementById("runType").addEventListener("change", loadJobs);
-document.getElementById("touchFreight").addEventListener("change", loadJobs);
-document.getElementById("homeTime").addEventListener("change", loadJobs);
-
+["state", "experience", "runType", "touchFreight", "homeTime"].forEach(id =>
+  document.getElementById(id).addEventListener("change", loadJobs)
+);
 loadJobs();
 </script>
 </body>
 </html>
+
