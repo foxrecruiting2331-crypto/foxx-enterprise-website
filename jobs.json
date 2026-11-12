@@ -2168,5 +2168,47 @@
       "43215",
       "60601"
     ]
-  }
+  },
+
+{
+  "id": "central-valley-tracy-nightly-cdl-a-driver",
+  "title": "Central Valley to Tracy – Local CDL-A Driver",
+  "location": "Tracy, California / Central Valley",
+  "state": "California",
+  "pay": "$300 Per Day | Average Weekly $1,300–$1,500",
+  "home": "Home Daily",
+  "freight": "100% Drop & Hook",
+  "experience": "Minimum 6 Months of Experience",
+  "details": [
+    "Run within California's Central Valley and return to Tracy.",
+    "Home daily.",
+    "Night shift.",
+    "All drop and hook.",
+    "Round-trip routes.",
+    "NO Donner Pass.",
+    "Pay: $300 per day.",
+    "Average Weekly Pay: $1,300–$1,500.",
+    "QUALIFICATIONS",
+    "Must be at least 21 years old.",
+    "Minimum 6 months of experience with a valid Class A CDL.",
+    "Must pass hair follicle and urine drug tests.",
+    "No SAP."
+  ],
+  "apply": "",
+  "zipCodes": [
+    "95201",
+    "95202",
+    "95203",
+    "95204",
+    "95205",
+    "95206",
+    "95207",
+    "95209",
+    "95210",
+    "95211",
+    "95212",
+    "95215"
+  ],
+  "zipRadius": 40
+}
 ]
