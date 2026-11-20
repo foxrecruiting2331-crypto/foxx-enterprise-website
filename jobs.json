@@ -2505,5 +2505,37 @@
     "No SAP."
   ],
   "apply": ""
+},
+
+{
+  "id": "denver-aurora-co-semi local-cdl-a-driver",
+  "title": "Semi Local CDL-A Truck Driver - $10,000 Sign-On Bonus",
+  "location": "Denver / Aurora, CO",
+  "state": "CO",
+  "pay": "$1,790 - $2,019 Average Weekly",
+  "home": "Home Every Other Day - Possibility of Daily Home Time",
+  "freight": "99% No-Touch Freight",
+  "experience": "Minimum 6 Months CDL-A Experience Within the Past 3 Years",
+  "details": [
+    "$10,000 Sign-On Bonus",
+    "Home every other day with possibility of daily home time",
+    "99% no-touch freight",
+    "Running CO, WY and CT",
+    "Average weekly pay: $1,790 - $2,019",
+    "Minimum guaranteed weekly pay of $1,790 as long as you work and are available for your 5-day work week",
+    "Must reside within 100 miles of Denver, CO or Aurora, CO",
+    "Must have mountain driving experience",
+    "Must be at least 21 years old",
+    "Minimum 6 months of experience within the past 3 years",
+    "Valid Class A CDL required",
+    "Must pass hair follicle drug test",
+    "No SAP"
+  ],
+  "apply": "",
+  "zipCodes": [
+    "80202",
+    "80012"
+  ],
+  "zipRadius": 100
 }
 ]
