@@ -2537,5 +2537,30 @@
     "80012"
   ],
   "zipRadius": 100
+},
+  
+{
+  "id": "southwest-regional-cdl-a-driver",
+  "title": "Southwest Regional CDL-A Truck Driver",
+  "location": "Southwest / Western United States",
+  "state": "Multi-State",
+  "pay": "$1,000 - $1,700 Average Weekly",
+  "home": "Home Weekly",
+  "freight": "100% No-Touch Freight | Drop and Hook",
+  "experience": "6 Months in Last 12 Months OR 1+ Year in Last 36 Months",
+  "details": [
+    "Home weekly",
+    "Average weekly mileage: 2,200+",
+    "Average weekly pay: $1,000 - $1,700",
+    "100% no-touch freight",
+    "Drop and hook",
+    "Running area includes the Southwest and Western United States",
+    "States: CA, NV, AZ, UT, NM, OR, ID, WY and CO",
+    "Must be at least 21 years old",
+    "6 months of experience within the last 12 months OR 1+ year of experience within the last 36 months",
+    "Valid Class A CDL required",
+    "Must pass urine drug testing"
+  ],
+  "apply": ""
 }
 ]
